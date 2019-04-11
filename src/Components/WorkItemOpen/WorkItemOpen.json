@@ -1,18 +1,15 @@
 {
     "contributions": [
         {
-            "id": "work-item-open-hub",
+            "id": "reports-menu-item",
             "type": "ms.vss-web.hub",
             "targets": [
-                "ms.vss-work-web.work-hub-group"
+                ".company-menu-group"
             ],
             "properties": {
-                "name": "Sample WorkItem Open",
+                "name": "Reports",
                 "uri": "dist/WorkItemOpen/WorkItemOpen.html",
-                "icon": {
-                    "light": "static/add-grey.png",
-                    "dark": "static/add-green.png"
-                }
+                "icon": "asset://static/reports.png"
             }
         }
     ],
