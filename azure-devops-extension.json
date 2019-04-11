@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "azure-company",
     "publisher": "dpolania",
-    "version": "1.0.32",
+    "version": "1.0.33",
     "name": "Azure Company",
     "description": "Create the structure of your applications",
     "categories": [
@@ -29,6 +29,20 @@
         {
             "path": "dist",
             "addressable": true
+        }
+    ],
+    "contributions": [
+        {
+            "id": "company-menu-group",
+            "type": "ms.vss-web.hub-group",
+            "description": "Adds an 'Company' hub group",
+            "targets": [
+                "ms.vss-web.project-hub-groups-collection"
+            ],
+            "properties": {
+                "name": "Company",
+                "icon": "asset://static/logo.png"
+            }
         }
     ]
 }

@@ -1,10 +1,10 @@
 {
     "contributions": [
         {
-            "id": "hub",
+            "id": "applications-menu-item",
             "type": "ms.vss-web.hub",
             "targets": [
-                "ms.vss-build-web.build-release-hub-group"
+                ".company-menu-group"
             ],
             "includes": [
                 "ms.vss-tfs-web.tfs-page-data-service",
@@ -13,9 +13,9 @@
                 "ms.vss-features.host-dialog-service"
             ],
             "properties": {
-                "name": "Sample Hub",
+                "name": "Applications",
                 "uri": "dist/Hub/Hub.html",
-                "icon": "asset://static/sample-icon.png"
+                "icon": "asset://static/apps.png"
             }
         }
     ]
