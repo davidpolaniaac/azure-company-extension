@@ -1,0 +1,16 @@
+{
+    "contributions": [
+        {
+            "id": "applications",
+            "type": "ms.vss-web.hub",
+            "targets": [
+                ".company-menu-group"
+            ],
+            "properties": {
+                "name": "Applications",
+                "uri": "dist/Applications/Applications.html",
+                "icon": "asset://static/apps.png"
+            }
+        }
+    ]
+}

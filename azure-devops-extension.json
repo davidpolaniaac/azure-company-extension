@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "azure-company",
     "publisher": "dpolania",
-    "version": "1.0.33",
+    "version": "1.0.65",
     "name": "Azure Company",
     "description": "Create the structure of your applications",
     "categories": [
@@ -12,6 +12,9 @@
         {
             "id": "Microsoft.VisualStudio.Services"
         }
+    ],
+    "scopes": [
+        "vso.work", "vso.code"
     ],
     "icons": {
         "default": "logo.png"

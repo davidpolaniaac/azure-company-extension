@@ -1,19 +1,16 @@
 {
     "contributions": [
         {
-            "id": "reports-menu-item",
+            "id": "tree",
             "type": "ms.vss-web.hub",
             "targets": [
                 ".company-menu-group"
             ],
             "properties": {
-                "name": "Reports",
-                "uri": "dist/WorkItemOpen/WorkItemOpen.html",
+                "name": "Tree",
+                "uri": "dist/Tree/Tree.html",
                 "icon": "asset://static/reports.png"
             }
         }
-    ],
-    "scopes": [
-        "vso.work"
     ]
 }
