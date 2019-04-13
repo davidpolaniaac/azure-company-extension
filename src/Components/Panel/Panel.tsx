@@ -6,6 +6,8 @@ import * as SDK from "azure-devops-extension-sdk";
 import { Button } from "azure-devops-ui/Button";
 import { ButtonGroup } from "azure-devops-ui/ButtonGroup";
 import { Toggle } from "azure-devops-ui/Toggle";
+import { TextField } from "azure-devops-ui/TextField";
+
 import { showRootComponent } from "../../Common";
 
 interface IPanelContentState {
@@ -15,7 +17,7 @@ interface IPanelContentState {
 }
 
 class PanelContent extends React.Component<{}, IPanelContentState> {
-    
+
     constructor(props: {}) {
         super(props);
         this.state = {};
@@ -23,7 +25,7 @@ class PanelContent extends React.Component<{}, IPanelContentState> {
 
     public componentDidMount() {
         SDK.init();
-        
+
         SDK.ready().then(() => {
             const config = SDK.getConfiguration();
             const message = config.message || "Custom dialog message";
@@ -50,14 +52,17 @@ class PanelContent extends React.Component<{}, IPanelContentState> {
 
         return (
             <div className="sample-panel flex-column flex-grow">
-                <Toggle checked={toggleValue} text={message} disabled={!ready} onChange={(e, val) => this.setState({toggleValue: val})} />
-                <div className="flex-grow flex-column flex-center justify-center" style={{ border: "1px solid #eee", margin: "10px 0" }}>
-                    Additional content placeholder
+
+                <div className="flex-grow flex-column flex-center" style={{ margin: "10px 0" }}>
+                    <TextField
+                        value={""}
+                        onChange={this.onTextValueChanged}
+                    />
                 </div>
                 <ButtonGroup className="sample-panel-button-bar">
                     <Button
                         primary={true}
-                        text="OK"
+                        text="Create"
                         onClick={() => this.dismiss(true)}
                     />
                     <Button
@@ -67,6 +72,11 @@ class PanelContent extends React.Component<{}, IPanelContentState> {
                 </ButtonGroup>
             </div>
         );
+    }
+
+
+    private onTextValueChanged = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, value: string): void => {
+        console.log("value:", value);
     }
 
     private dismiss(useValue: boolean) {
