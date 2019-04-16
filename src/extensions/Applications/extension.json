@@ -1,15 +1,15 @@
 {
     "contributions": [
         {
-            "id": "tree",
+            "id": "applications",
             "type": "ms.vss-web.hub",
             "targets": [
                 ".company-menu-group"
             ],
             "properties": {
-                "name": "Tree",
-                "uri": "dist/Tree/Tree.html",
-                "icon": "asset://static/reports.png"
+                "name": "Applications",
+                "uri": "dist/Applications/index.html",
+                "icon": "asset://static/apps.png"
             }
         }
     ]
