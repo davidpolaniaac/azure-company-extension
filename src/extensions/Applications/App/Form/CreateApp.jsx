@@ -2,8 +2,10 @@ import * as React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { TextField, TextFieldWidth } from 'azure-devops-ui/TextField';
 import { Button } from 'azure-devops-ui/Button';
+import PropTypes from 'prop-types';
 import { ButtonGroup } from 'azure-devops-ui/ButtonGroup';
 import { FormItem } from 'azure-devops-ui/FormItem';
+import FORM_NAMES from '../../constants/formNames';
 
 const ApplicationName = props => (
 
@@ -18,6 +20,13 @@ const ApplicationName = props => (
 
   </FormItem>
 );
+
+
+ApplicationName.propTypes = {
+  meta: PropTypes.element.isRequired,
+  input: PropTypes.element.isRequired,
+  label: PropTypes.string.isRequired,
+};
 
 const validate = (values) => {
   const errors = {};
@@ -63,7 +72,14 @@ const CreateApp = props => (
 );
 
 
+CreateApp.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+};
+
+
 export default reduxForm({
-  form: 'CreateApp',
+  form: FORM_NAMES.DOMAIN.CREATE_DOMAIN,
   validate,
 })(CreateApp);
