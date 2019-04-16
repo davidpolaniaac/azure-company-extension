@@ -6,6 +6,12 @@
             "targets": [
                 ".company-menu-group"
             ],
+            "includes": [
+                "ms.vss-tfs-web.tfs-page-data-service",
+                "ms.vss-features.host-navigation-service",
+                "ms.vss-features.extension-data-service",
+                "ms.vss-features.host-dialog-service"
+            ],
             "properties": {
                 "name": "Applications",
                 "uri": "dist/Applications/index.html",
