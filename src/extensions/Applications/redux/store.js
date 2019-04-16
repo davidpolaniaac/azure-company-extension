@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { reducer as reduxFormReducer } from 'redux-form';
-import ReduxThunk from 'redux-thunk';
 import { fetchMiddleware } from 'redux-recompose';
+import ReduxThunk from 'redux-thunk';
+import domain from './domain/reducer';
 
 const reducers = {
   form: reduxFormReducer,
+  domain,
 };
 
 const appReducer = combineReducers(reducers);

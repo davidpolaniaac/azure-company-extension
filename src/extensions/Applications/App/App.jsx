@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as SDK from 'azure-devops-extension-sdk';
+import PropTypes from 'prop-types';
 import {
   BaseMasterDetailsContext,
   bindSelectionToObservable,
@@ -263,6 +264,10 @@ const InitialDetailView = (props) => {
 };
 
 
+InitialDetailView.propTypes = {
+  detailItem: PropTypes.element.isRequired,
+};
+
 const renderInitialRow = (
   index,
   item,
@@ -308,6 +313,7 @@ const InitialMasterPanelContent = (props) => {
   );
 };
 
+
 const masterDetailsContext = new BaseMasterDetailsContext(
   initialPayload,
   () => {
@@ -320,7 +326,7 @@ export default class App extends React.Component {
     SDK.init();
   }
 
-  onDismiss() {
+  onDismiss = () => {
     console.log('Hola', isDialogOpen.value);
     isDialogOpen.value = false;
   }
@@ -329,24 +335,24 @@ export default class App extends React.Component {
   render() {
     console.log(isDialogOpen.value);
     return (
-            <>
+      <>
 
-              <Observer isDialogOpen={isDialogOpen}>
-                {props => (props.isDialogOpen ? (
-                  <DialogCreateApp onDismiss={this.onDismiss} />
+        <Observer isDialogOpen={isDialogOpen}>
+          {props => (props.isDialogOpen ? (
+            <DialogCreateApp onDismiss={this.onDismiss} />
                         ) : null)}
-              </Observer>
+        </Observer>
 
 
-              <MasterDetailsContext.Provider value={masterDetailsContext}>
-                <div className="flex-row" style={{ width: '100%' }}>
-                  <MasterPanel showOnSmallScreens />
-                  <DetailsPanel />
-                </div>
-              </MasterDetailsContext.Provider>
+        <MasterDetailsContext.Provider value={masterDetailsContext}>
+          <div className="flex-row" style={{ width: '100%' }}>
+            <MasterPanel showOnSmallScreens />
+            <DetailsPanel />
+          </div>
+        </MasterDetailsContext.Provider>
 
 
-            </>
+      </>
     );
   }
 }

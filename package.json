@@ -26,6 +26,11 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties"
+      ]
     ]
   },
   "dependencies": {
@@ -44,22 +49,23 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
     "babel-eslint": "9.0.0",
+    "babel-loader": "^8.0.5",
     "babel-runtime": "6.26.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-react-app": "^3.0.3",
-    "eslint-plugin-flowtype": "2.50.1",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.1",
-    "eslint-plugin-react": "7.11.1",
     "base64-inline-loader": "^1.1.1",
     "copy-webpack-plugin": "^4.5.4",
     "css-loader": "~1.0.0",
     "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-react-app": "^3.0.3",
     "eslint-loader": "^2.1.2",
+    "eslint-plugin-flowtype": "2.50.1",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.11.1",
     "file-loader": "~2.0.0",
     "node-sass": "^4.11.0",
     "redux-devtools": "^3.5.0",
