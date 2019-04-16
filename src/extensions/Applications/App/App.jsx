@@ -324,6 +324,7 @@ const masterDetailsContext = new BaseMasterDetailsContext(
 export default class App extends React.Component {
   componentDidMount() {
     SDK.init();
+    SDK.ready();
   }
 
   onDismiss = () => {
