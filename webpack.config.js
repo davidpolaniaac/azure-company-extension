@@ -2,24 +2,22 @@ const path = require("path");
 const fs = require("fs");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-// Webpack entry points. Mapping from resulting bundle name to the source file entry.
 const entries = {};
 
-// Loop through subfolders in the "Components" folder and add an entry for each one
-const omponentsDir = path.join(__dirname, "src/Components");
-fs.readdirSync(omponentsDir).filter(dir => {
-    if (fs.statSync(path.join(omponentsDir, dir)).isDirectory()) {
-        entries[dir] = "./" + path.relative(process.cwd(), path.join(omponentsDir, dir, dir));
+const extensionsDir = path.join(__dirname, "src/extensions");
+fs.readdirSync(extensionsDir).filter(dir => {
+    if (fs.statSync(path.join(extensionsDir, dir)).isDirectory()) {
+        entries[dir] = "./" + path.relative(process.cwd(), path.join(extensionsDir, dir, "index"));
     }
 });
 
 module.exports = {
     entry: entries,
     output: {
-        filename: "[name]/[name].js"
+        filename: "[name]/index.js"
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js"],
+        extensions: [".jsx", ".js"],
         alias: {
             "azure-devops-extension-sdk": path.resolve("node_modules/azure-devops-extension-sdk")
         },
@@ -30,8 +28,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                loader: "ts-loader"
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader']
             },
             {
                 test: /\.scss$/,
@@ -54,6 +53,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyWebpackPlugin([ { from: "**/*.html", context: "src/Components" }])
+        new CopyWebpackPlugin([{ from: "**/*.html", context: "src/extensions" }])
     ]
 };
