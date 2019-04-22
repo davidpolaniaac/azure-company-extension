@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   BaseMasterDetailsContext,
   bindSelectionToObservable,
-  createChildLayer,
   MasterDetailsContext,
 } from 'azure-devops-ui/MasterDetailsContext';
 import { DetailsPanel, MasterPanel, MasterPanelHeader } from 'azure-devops-ui/MasterDetails';
@@ -27,31 +26,12 @@ const isDialogOpen = new ObservableValue(false);
 
 const SampleData = [
   {
-    pullRequestTitle: 'Negocios Bancolombia',
-    userImageUrl: '/persona-male.png',
-    userName: 'Negocios',
-    commits: [
-      { description: 'Balance service', hash: 'abc123', date: '2019-03-05' },
-      { description: 'Configuration', hash: 'def456', date: '2019-03-04' },
-      { description: 'Authentication Service', hash: 'ghi789', date: '2019-03-03' },
-    ],
-  },
-  {
-    pullRequestTitle: 'app personas',
-    userImageUrl: '/persona-male.png',
-    userName: 'Henry Bill',
-    commits: [
-      { description: 'movil', hash: 'abc123', date: '2019-03-05' },
-      { description: 'Servicio 1', hash: 'def456', date: '2019-03-04' },
-    ],
-  },
-  {
-    pullRequestTitle: 'Sitio transaccional',
-    userImageUrl: '/persona-female.png',
-    userName: 'Ashley McCarthy',
-    commits: [
-      { description: 'Web', hash: 'ghi789', date: '2019-03-03' },
-      { description: 'Service', hash: '123abc', date: '2019-03-02' },
+    management: 'Negocios Bancolombia',
+    userName: 'Lucas Espinal',
+    date: '2019-03-03',
+    applications: [
+      {
+      },
     ],
   },
 ];
@@ -104,13 +84,13 @@ const initialPayload = {
     ),
     renderHeader: () => (
       <Header
-        title="Apps"
+        title="Mgmt"
         commandBarItems={commandBarItemsSimple}
         titleSize={TitleSize.Large}
       />
     ),
     renderSearch: () => (
-      <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search application" />
+      <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search managerment" />
     ),
     onBackButtonClick: () => false,
   },
@@ -136,8 +116,8 @@ const renderNewRow = (
     <div className="flex-row flex-center h-scroll-hidden" style={{ padding: '10px 0px' }}>
       <div className="flex-noshrink" style={{ width: '56px' }} />
       <div className="flex-column flex-shrink" style={{ minWidth: 0 }}>
-        <div className="primary-text text-ellipsis">{item.description}</div>
-        <div className="secondary-text">{item.hash}</div>
+        <div className="primary-text text-ellipsis">{item.component}</div>
+        <div className="secondary-text">{item.userName}</div>
       </div>
     </div>
   </ListItem>
@@ -145,16 +125,38 @@ const renderNewRow = (
 
 const newDetailsContent = {
   renderContent: item => (
-    <div>
-      {item.description} - {item.hash} - {item.date}
-    </div>
+    <Page className="flex-grow">
+      <Header
+        title={item.component}
+        description={`Created by ${item.userName}`}
+        commandBarItems={commandBarItemsSimple}
+        titleSize={TitleSize.Large}
+      />
+      <div className="page-content page-content-top">
+        <Card
+          className="page-content"
+          contentProps={{ contentPadding: false }}
+        >
+
+          <div className="flex-row">
+
+            <div className="flex-column">
+              <div className="body-m secondary-text">{item.userName}</div>
+              <div className="body-m primary-text">{item.date}</div>
+            </div>
+
+          </div>
+        </Card>
+      </div>
+    </Page>
   ),
+
 };
 
 
 const newMasterPanelContent = {
   renderContent: (parentItem, initialSelectedMasterItem) => {
-    const itemProvider = new ArrayItemProvider(parentItem.commits);
+    const itemProvider = new ArrayItemProvider(parentItem.components);
     const selection = new ListSelection();
     bindSelectionToObservable(selection, itemProvider, initialSelectedMasterItem);
     return (
@@ -169,9 +171,12 @@ const newMasterPanelContent = {
   },
   renderHeader: parentItem => (
     <MasterPanelHeader
-      title={parentItem.pullRequestTitle}
+      title={parentItem.application}
       subTitle={`Created by ${parentItem.userName}`}
     />
+  ),
+  renderSearch: () => (
+    <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search component" />
   ),
 };
 
@@ -191,10 +196,10 @@ const InitialDetailView = (props) => {
       className="fontWeightSemiBold fontSizeM scroll-hidden"
       key={`col-${columnIndex}`}
       tableColumn={tableColumn}
-      line1={<span className="fontSizeM text-ellipsis">{tableItem.description}</span>}
+      line1={<span className="fontSizeM text-ellipsis">{tableItem.application}</span>}
       line2={
         <span className="fontSize secondary-text flex-center text-ellipsis">
-          {tableItem.hash}
+          {tableItem.userName}
         </span>
               }
     />
@@ -217,32 +222,38 @@ const InitialDetailView = (props) => {
 
   const columns = [
     {
-      id: 'description',
-      name: 'Commit',
+      id: 'applications',
+      name: 'Applications',
       width: new ObservableValue(-33),
       renderCell: renderCommitNameCell,
     },
     {
-      id: 'date', name: 'Date', width: new ObservableValue(-33), renderCell: renderDateColumn,
+      id: 'date',
+      name: 'Date',
+      width: new ObservableValue(-33),
+      renderCell: renderDateColumn,
     },
   ];
 
   const onRowActivated = (event, tableRow) => {
-    const newPayload = createChildLayer(
-      'commit-details',
-      newMasterPanelContent,
-      newDetailsContent,
-      tableRow.data,
-      initialPayload,
-    );
+    const item = tableRow.data.components[0] ? tableRow.data.components[0] : {};
+    const newPayload = {
+      key: 'commit-details',
+      masterPanelContent: newMasterPanelContent,
+      detailsContent: newDetailsContent,
+      selectedMasterItem: new ObservableValue(item),
+      parentItem: tableRow.data,
+    };
+
     masterDetailsContext.push(newPayload);
   };
 
   return (
     <Page>
       <Header
+        title={detailItem.management}
         description={`Created by ${detailItem.userName}`}
-        title={detailItem.pullRequestTitle}
+        commandBarItems={commandBarItemsSimple}
         titleSize={TitleSize.Large}
       />
       <div className="page-content page-content-top">
@@ -252,7 +263,7 @@ const InitialDetailView = (props) => {
         >
           <Table
             columns={columns}
-            itemProvider={new ArrayItemProvider(detailItem.commits)}
+            itemProvider={new ArrayItemProvider(detailItem.applications)}
             showLines
             singleClickActivation
             onActivate={onRowActivated}
@@ -283,7 +294,7 @@ const renderInitialRow = (
     <div className="flex-row flex-center h-scroll-hidden" style={{ padding: '10px 0px' }}>
       <div className="flex-noshrink" style={{ width: '32px' }} />
       <div className="flex-column flex-shrink" style={{ minWidth: 0 }}>
-        <div className="primary-text text-ellipsis">{item.pullRequestTitle}</div>
+        <div className="primary-text text-ellipsis">{item.management}</div>
         <div className="secondary-text">{item.userName}</div>
       </div>
     </div>
