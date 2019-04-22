@@ -1,0 +1,51 @@
+[
+    {
+      management: 'Negocios Bancolombia',
+      userName: 'Lucas Espinal',
+      date: '2019-03-03',
+      applications: [
+        {
+          application: 'Balance service',
+          date: '2019-03-03',
+          userName: 'Aldair Espinal',
+          components: [
+            {
+              component: 'query',
+              date: '2019-03-03',
+              userName: 'luisa Espinal',
+            },
+            {
+              component: 'configuration',
+              date: '2019-03-03',
+              userName: 'Maria Espinal',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      management: 'Canales y tarjetas',
+      userName: 'David Polania',
+      date: '2019-03-03',
+      applications: [
+        {
+          application: 'Boton tranferencia',
+          date: '2019-03-03',
+          userName: 'David Espinal',
+          components: [
+            {
+              component: 'Front',
+              date: '2019-03-03',
+              userName: 'Carlos Espinal',
+            },
+          ],
+        },
+        {
+          application: 'Sitio',
+          date: '2019-03-03',
+          userName: 'David Espinal',
+          components: [],
+        },
+      ],
+    },
+  ]
