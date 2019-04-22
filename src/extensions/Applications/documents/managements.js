@@ -1,5 +1,5 @@
 import { createDocument, getDocuments } from '../storage/storage';
-import DOCUMENTS from './constants';
+import { DOCUMENTS } from './constants';
 
 export async function createDocumentManagement(values) {
   return createDocument(DOCUMENTS.MANAGEMENTS, values);

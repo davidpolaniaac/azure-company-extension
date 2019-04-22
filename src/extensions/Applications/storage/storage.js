@@ -1,15 +1,9 @@
-import * as SDK from 'azure-devops-extension-sdk';
-
-async function getDataManager() {
-  await SDK.ready();
-  const accessToken = await SDK.getAccessToken();
-  const service = await SDK.getService('ms.vss-features.extension-data-service');
-  return service.getExtensionDataManager(SDK.getExtensionContext().id, accessToken);
-}
+import { getDataManager, normalizeData } from './utlis';
 
 export async function createDocument(documentName, value) {
   const dataManager = await getDataManager();
-  return dataManager.setDocument(documentName, value);
+  const data = await normalizeData(value);
+  return dataManager.setDocument(documentName, data);
 }
 
 export async function getDocuments(documentName) {
@@ -24,6 +18,7 @@ export async function deleteDocument(documentName, value) {
 
 export async function updateDocument(documentName, value) {
   const dataManager = await getDataManager();
-  return dataManager.updateDocument(documentName, value);
+  const data = await normalizeData(value);
+  return dataManager.updateDocument(documentName, data);
 }
 

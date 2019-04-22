@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { ButtonGroup } from 'azure-devops-ui/ButtonGroup';
 import { FormItem } from 'azure-devops-ui/FormItem';
 import FORM_NAMES from '../../constants/formNames';
+import { MANAGEMENT_FIELDS } from '../../constants/fields';
 
 const ManagementName = props => (
 
@@ -47,7 +48,7 @@ const CreateManagement = props => (
 
   <form onSubmit={props.handleSubmit}>
     <Field
-      name="ManagementName"
+      name={MANAGEMENT_FIELDS.NAME}
       label="Management Name"
       component={ManagementName}
       type="text"
