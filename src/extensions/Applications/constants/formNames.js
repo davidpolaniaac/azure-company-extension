@@ -1,5 +1,5 @@
 export default {
-  DOMAIN: {
-    CREATE_DOMAIN: 'createDomain',
+  MANAGEMENT: {
+    CREATE_MANAGEMENT: 'createManagement',
   },
 };
