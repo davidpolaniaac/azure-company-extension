@@ -1,7 +1,7 @@
-import { createDocumentDomain } from '../app/Documents/Domain';
+import { createDocumentManagement } from '../documents/managements';
 
 const services = {
-  createDocument: values => createDocumentDomain(values)
+  createDocument: values => createDocumentManagement(values)
     .then(response => ({ ok: true, ...response }))
     .catch(error => ({ ok: false, ...error })),
 };

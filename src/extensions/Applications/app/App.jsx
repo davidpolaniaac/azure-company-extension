@@ -21,7 +21,7 @@ import {
 } from 'azure-devops-ui/Table';
 import { Page } from 'azure-devops-ui/Page';
 import { Observer } from 'azure-devops-ui/Observer';
-import DialogCreateApp from './Dialog/DialogCreateApp';
+import DialogCreateManagement from './Dialog/DialogCreateManagement';
 
 const isDialogOpen = new ObservableValue(false);
 
@@ -328,19 +328,16 @@ export default class App extends React.Component {
   }
 
   onDismiss = () => {
-    console.log('Hola', isDialogOpen.value);
     isDialogOpen.value = false;
   }
 
-
   render() {
-    console.log(isDialogOpen.value);
     return (
       <>
 
         <Observer isDialogOpen={isDialogOpen}>
           {props => (props.isDialogOpen ? (
-            <DialogCreateApp onDismiss={this.onDismiss} />
+            <DialogCreateManagement onDismiss={this.onDismiss} />
                         ) : null)}
         </Observer>
 
