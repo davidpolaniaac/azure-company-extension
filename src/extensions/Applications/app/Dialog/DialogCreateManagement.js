@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dialog } from 'azure-devops-ui/Dialog';
-import { actionCreators as managementActions } from '../../redux/management/actions';
+import { actionCreators as managementActions } from '../../redux/managements/actions';
 import CreateManagement from '../Form/CreateManagement';
 
 class DialogCreateManagement extends React.Component {
