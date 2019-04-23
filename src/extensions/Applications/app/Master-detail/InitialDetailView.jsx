@@ -66,7 +66,7 @@ function InitialDetailView(props) {
   ];
 
   const onRowActivated = (event, tableRow) => {
-    const item = tableRow.data.components[0] ? tableRow.data.components[0] : {};
+    const item = tableRow.data.components && tableRow.data.components[0] ? tableRow.data.components[0] : {};
     const newPayload = {
       key: 'commit-details',
       masterPanelContent: newMasterPanelContent,
@@ -93,7 +93,7 @@ function InitialDetailView(props) {
         >
           <Table
             columns={columns}
-            itemProvider={new ArrayItemProvider(detailItem.applications)}
+            itemProvider={new ArrayItemProvider(detailItem.applications || [])}
             showLines
             singleClickActivation
             onActivate={onRowActivated}

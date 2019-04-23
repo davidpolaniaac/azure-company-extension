@@ -5,7 +5,7 @@ const services = {
     .then(response => ({ ok: true, ...response }))
     .catch(error => ({ ok: false, ...error })),
   getDocuments: () => getDocumentManagements()
-    .then(response => ({ ok: true, ...response }))
+    .then(values => ({ ok: true, values }))
     .catch(error => ({ ok: false, ...error })),
 };
 

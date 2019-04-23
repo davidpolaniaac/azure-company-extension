@@ -12,7 +12,7 @@ function initialPayload(data) {
     key: 'initial',
     masterPanelContent: {
       renderContent: (parentItem, initialSelectedMasterItem) => (
-        <InitialMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} data={data} />
+        <InitialMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} data={data || []} />
       ),
       renderHeader: () => (
         <Header
@@ -29,7 +29,7 @@ function initialPayload(data) {
     detailsContent: {
       renderContent: item => <InitialDetailView detailItem={item} />,
     },
-    selectedMasterItem: new ObservableValue(data[0]),
+    selectedMasterItem: new ObservableValue(data[0] || {}),
     parentItem: undefined,
   });
 }

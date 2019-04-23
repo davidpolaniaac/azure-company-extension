@@ -8,7 +8,7 @@ import renderNewRow from './renderNewRow';
 
 const newMasterPanelContent = {
   renderContent: (parentItem, initialSelectedMasterItem) => {
-    const itemProvider = new ArrayItemProvider(parentItem.components);
+    const itemProvider = new ArrayItemProvider(parentItem.components || []);
     const selection = new ListSelection();
     bindSelectionToObservable(selection, itemProvider, initialSelectedMasterItem);
     return (

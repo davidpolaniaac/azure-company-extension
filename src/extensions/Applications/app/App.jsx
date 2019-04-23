@@ -16,8 +16,11 @@ class App extends React.Component {
 
   render() {
     const { managementsLoading, managements } = this.props;
+    if (managementsLoading) {
+      return (<dix>Loading</dix>);
+    }
 
-    return (<Main data={SampleData} />);
+    return (<Main data={managements} />);
   }
 }
 

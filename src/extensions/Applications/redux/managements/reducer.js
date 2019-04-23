@@ -12,7 +12,7 @@ const initialStateDescription = {
 const initialState = completeState(initialStateDescription);
 
 const reducerDescription = {
-  primaryActions: [actions.ADD_INFO],
+  primaryActions: [actions.ADD_INFO, actions.GET_INFO],
 };
 
 const reducer = createReducer(initialState, completeReducer(reducerDescription));
