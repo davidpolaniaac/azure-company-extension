@@ -29,7 +29,7 @@ export const actionCreators = {
     target: MANAGEMENTS,
     service: managementServices.getDocuments,
     failureSelector: response => response.code,
-    successSelector: response => response.value,
+    successSelector: response => response.values,
     injections: [
       withPostFailure((dispatch, response) => {
         console.log('ERROR GET MANAGEMENTS :', response);
