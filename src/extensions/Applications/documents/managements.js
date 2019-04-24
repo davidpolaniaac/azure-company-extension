@@ -1,4 +1,4 @@
-import { createDocument, getDocuments } from '../storage/storage';
+import { createDocument, getDocuments } from '../storage';
 import { DOCUMENTS } from './constants';
 
 export async function createDocumentManagement(values) {

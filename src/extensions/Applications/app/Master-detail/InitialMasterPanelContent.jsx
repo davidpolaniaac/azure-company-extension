@@ -6,8 +6,8 @@ import { List, ListSelection } from 'azure-devops-ui/List';
 import renderInitialRow from './renderInitialRow';
 
 function InitialMasterPanelContent(props) {
-  const [initialItemProvider] = React.useState(new ArrayItemProvider(props.data));
-  const [initialSelection] = React.useState(new ListSelection());
+  const initialItemProvider = new ArrayItemProvider(props.data);
+  const initialSelection = new ListSelection();
 
   React.useEffect(() => {
     bindSelectionToObservable(
