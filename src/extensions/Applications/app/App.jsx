@@ -1,25 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as SDK from 'azure-devops-extension-sdk';
 import SampleData from './data.json';
 import Main from './Master-detail/Main';
 import { actionCreators as managementsActions } from '../redux/managements/actions';
 
 class App extends React.Component {
-  async componentDidMount() {
-    await SDK.init();
-    await SDK.ready();
+  componentDidMount() {
     const { getManagements } = this.props;
     getManagements();
   }
 
   render() {
-    const { managementsLoading, managements } = this.props;
-    if (managementsLoading) {
-      return (<dix>Loading</dix>);
-    }
-
+    const { managements } = this.props;
     return (<Main data={managements} />);
   }
 }
@@ -27,7 +20,6 @@ class App extends React.Component {
 App.propTypes = {
   managements: PropTypes.arrayOf(PropTypes.shape()),
   getManagements: PropTypes.func.isRequired,
-  managementsLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -40,4 +32,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
