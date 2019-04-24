@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SampleData from './data.json';
 import Main from './Master-detail/Main';
+import CustomDialog from './components/CustomDialog';
 import { actionCreators as managementsActions } from '../redux/managements/actions';
 
 class App extends React.Component {
@@ -13,7 +14,12 @@ class App extends React.Component {
 
   render() {
     const { managements } = this.props;
-    return (<Main data={managements} />);
+    return (
+      <>
+        <CustomDialog />
+        <Main data={SampleData} />
+      </>
+    );
   }
 }
 
