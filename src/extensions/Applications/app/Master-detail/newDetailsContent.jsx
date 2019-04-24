@@ -1,17 +1,16 @@
 import React from 'react';
 import { Page } from 'azure-devops-ui/Page';
-import { Header, TitleSize } from 'azure-devops-ui/Header';
 import { Card } from 'azure-devops-ui/Card';
-import commandBarItemsSimple from './commandBarItemsSimple';
+import commandBarItemsComponent from './commandBarItemsComponent';
+import CustomHeader from '../components/CustomHeader';
 
 const newDetailsContent = {
   renderContent: item => (
     <Page className="flex-grow">
-      <Header
+      <CustomHeader
         title={item.component}
-        description={`Created by ${item.userName}`}
-        commandBarItems={commandBarItemsSimple}
-        titleSize={TitleSize.Large}
+        description={item.userName}
+        CommandBarItems={commandBarItemsComponent}
       />
       <div className="page-content page-content-top">
         <Card

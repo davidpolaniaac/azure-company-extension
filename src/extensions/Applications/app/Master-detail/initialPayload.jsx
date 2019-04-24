@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Header, TitleSize } from 'azure-devops-ui/Header';
 import { TextField } from 'azure-devops-ui/TextField';
 import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import InitialMasterPanelContent from './InitialMasterPanelContent';
-import commandBarItemsSimple from './commandBarItemsSimple';
+import CustomHeader from '../components/CustomHeader';
 import InitialDetailView from './InitialDetailView';
+import commandBarItemsManagement from './commandBarItemsManagement';
 
 function initialPayload(data) {
   return ({
@@ -15,11 +15,7 @@ function initialPayload(data) {
         <InitialMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} data={data || []} />
       ),
       renderHeader: () => (
-        <Header
-          title="Mgmt"
-          commandBarItems={commandBarItemsSimple}
-          titleSize={TitleSize.Large}
-        />
+        <CustomHeader CommandBarItems={commandBarItemsManagement} title="Mgmt" />
       ),
       renderSearch: () => (
         <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search managerment" />

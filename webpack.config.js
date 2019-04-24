@@ -2,6 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+process.env.NODE_ENV = 'production';
+process.env.BABEL_ENV = 'production';
+
 const entries = {};
 
 const extensionsDir = path.join(__dirname, 'src/extensions');

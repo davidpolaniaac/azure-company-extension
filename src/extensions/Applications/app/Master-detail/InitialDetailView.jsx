@@ -5,11 +5,11 @@ import { SimpleTableCell, Table, TwoLineTableCell } from 'azure-devops-ui/Table'
 import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import { ArrayItemProvider } from 'azure-devops-ui/Utilities/Provider';
 import { Page } from 'azure-devops-ui/Page';
-import { Header, TitleSize } from 'azure-devops-ui/Header';
 import { Card } from 'azure-devops-ui/Card';
 import newMasterPanelContent from './newMasterPanelContent';
 import newDetailsContent from './newDetailsContent';
-import commandBarItemsSimple from './commandBarItemsSimple';
+import commandBarItemsApplication from './commandBarItemsApplication';
+import CustomHeader from '../components/CustomHeader';
 
 function InitialDetailView(props) {
   const masterDetailsContext = React.useContext(MasterDetailsContext);
@@ -80,12 +80,12 @@ function InitialDetailView(props) {
 
   return (
     <Page>
-      <Header
+      <CustomHeader
         title={detailItem.management}
-        description={`Created by ${detailItem.userName}`}
-        commandBarItems={commandBarItemsSimple}
-        titleSize={TitleSize.Large}
+        description={detailItem.userName}
+        CommandBarItems={commandBarItemsApplication}
       />
+
       <div className="page-content page-content-top">
         <Card
           className="bolt-card-no-vertical-padding"
