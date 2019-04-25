@@ -9,7 +9,7 @@ const newDetailsContent = {
   renderContent: item => (
     <Page className="flex-grow">
       <CustomHeader
-        title={item.component}
+        title={item.name}
         description={item.userName}
         CommandBarItems={commandBarItems}
         element={ELEMENTS.COMPONENT}

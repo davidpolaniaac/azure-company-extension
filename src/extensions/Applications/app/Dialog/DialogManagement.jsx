@@ -18,8 +18,8 @@ class DialogManagement extends React.Component {
   }
 
   onUpdate = (values) => {
-    const { createManagement } = this.props;
-    return createManagement(values);
+    const { updateManagement } = this.props;
+    return updateManagement(values);
   }
 
   getSubmit(action) {
@@ -55,12 +55,14 @@ DialogManagement.propTypes = {
   action: PropTypes.string.isRequired,
   createManagement: PropTypes.func.isRequired,
   deleteManagement: PropTypes.func.isRequired,
+  updateManagement: PropTypes.func.isRequired,
   onDismiss: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   createManagement: values => dispatch(managementActions.createManagement(values)),
   deleteManagement: values => dispatch(managementActions.deleteManagement(values)),
+  updateManagement: values => dispatch(managementActions.updateManagement(values)),
 });
 
 export default connect(null, mapDispatchToProps)(DialogManagement);

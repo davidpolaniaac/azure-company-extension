@@ -1,21 +1,21 @@
 [
   {
-    "management": "Negocios Bancolombia",
+    "name": "Negocios Bancolombia",
     "userName": "Lucas Espinal",
     "date": "2019-03-03",
     "applications": [
       {
-        "application": "Balance service",
+        "name": "Balance service",
         "date": "2019-03-03",
         "userName": "Aldair Espinal",
         "components": [
           {
-            "component": "query",
+            "name": "query",
             "date": "2019-03-03",
             "userName": "luisa Espinal"
           },
           {
-            "component": "configuration",
+            "name": "configuration",
             "date": "2019-03-03",
             "userName": "Maria Espinal"
           }
@@ -24,17 +24,17 @@
     ]
   },
   {
-    "management": "Canales y tarjetas",
+    "name": "Canales y tarjetas",
     "userName": "David Polania",
     "date": "2019-03-03",
     "applications": [
       {
-        "application": "Boton tranferencia",
+        "name": "Boton tranferencia",
         "date": "2019-03-03",
         "userName": "David Espinal",
         "components": [
           {
-            "component": "Front",
+            "name": "Front",
             "date": "2019-03-03",
             "userName": "Carlos Espinal"
           }

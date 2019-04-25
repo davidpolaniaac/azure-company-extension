@@ -19,7 +19,7 @@ export const actionCreators = {
     payload: values,
     injections: [
       withPostSuccess(async (dispatch) => {
-        dispatch(reset(FORM_NAMES.MANAGEMENT.CREATE_MANAGEMENT));
+        dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
       }),
       withPostFailure((dispatch, response) => {
@@ -46,7 +46,7 @@ export const actionCreators = {
     payload: values,
     injections: [
       withPostSuccess(async (dispatch) => {
-        dispatch(reset(FORM_NAMES.MANAGEMENT.CREATE_MANAGEMENT));
+        dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
       }),
       withPostFailure((dispatch, response) => {
@@ -61,7 +61,7 @@ export const actionCreators = {
     payload: values,
     injections: [
       withPostSuccess(async (dispatch) => {
-        dispatch(reset(FORM_NAMES.MANAGEMENT.CREATE_MANAGEMENT));
+        dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
       }),
       withPostFailure((dispatch, response) => {

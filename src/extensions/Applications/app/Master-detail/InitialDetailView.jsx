@@ -27,7 +27,7 @@ function InitialDetailView(props) {
       className="fontWeightSemiBold fontSizeM scroll-hidden"
       key={`col-${columnIndex}`}
       tableColumn={tableColumn}
-      line1={<span className="fontSizeM text-ellipsis">{tableItem.application}</span>}
+      line1={<span className="fontSizeM text-ellipsis">{tableItem.name}</span>}
       line2={
         <span className="fontSize secondary-text flex-center text-ellipsis">
           {tableItem.userName}
@@ -82,7 +82,7 @@ function InitialDetailView(props) {
   return (
     <Page>
       <CustomHeader
-        title={detailItem.management}
+        title={detailItem.name}
         description={detailItem.userName}
         CommandBarItems={commandBarItems}
         element={ELEMENTS.APPLICATION}
