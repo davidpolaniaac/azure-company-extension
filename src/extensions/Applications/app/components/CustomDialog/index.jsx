@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { Dialog } from 'azure-devops-ui/Dialog';
 import { Observer } from 'azure-devops-ui/Observer';
 import { actionCreators as dialogActions } from '../../../redux/dialog/actions';
-import CreateManagement from '../../Form/CreateManagement';
+import DialogManagement from '../../Dialog/DialogManagement';
+import { ACTIONS } from '../../../constants/actions';
+
 
 class CustomDialog extends Component {
   componentWillUnmount() {
@@ -26,7 +28,9 @@ class CustomDialog extends Component {
             {(() => {
               switch (dialogType) {
                 case 'createManagement':
-                  return <CreateManagement onSubmit={this.onSubmit} onDismiss={dismissDialog} />;
+                  return <DialogManagement onDismiss={dismissDialog} action={ACTIONS.CREATE} />;
+                case 'deleteManagement':
+                  return <DialogManagement onDismiss={dismissDialog} action={ACTIONS.DELETE} />;
                 default:
                   return null;
               }
