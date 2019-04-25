@@ -8,8 +8,9 @@ import { Page } from 'azure-devops-ui/Page';
 import { Card } from 'azure-devops-ui/Card';
 import newMasterPanelContent from './newMasterPanelContent';
 import newDetailsContent from './newDetailsContent';
-import commandBarItemsApplication from './commandBarItemsApplication';
+import commandBarItems from './commandBarItems';
 import CustomHeader from '../components/CustomHeader';
+import { ELEMENTS } from '../../constants/elements';
 
 function InitialDetailView(props) {
   const masterDetailsContext = React.useContext(MasterDetailsContext);
@@ -83,7 +84,8 @@ function InitialDetailView(props) {
       <CustomHeader
         title={detailItem.management}
         description={detailItem.userName}
-        CommandBarItems={commandBarItemsApplication}
+        CommandBarItems={commandBarItems}
+        element={ELEMENTS.APPLICATION}
       />
 
       <div className="page-content page-content-top">

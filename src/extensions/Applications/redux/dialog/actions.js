@@ -7,12 +7,12 @@ const types = ['TOGGLE_DIALOG'];
 export const actions = createTypes(types, '@@DIALOG');
 
 export const actionCreators = {
-  showDialog: (title, type) => dispatch =>
+  showDialog: (element, type) => dispatch =>
     dispatch({
       type: actions.TOGGLE_DIALOG,
       target: TARGET,
       payload: {
-        isVisible: true, type, title,
+        isVisible: true, type, element,
       },
     }),
   dismissDialog: () => (dispatch) => {

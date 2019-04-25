@@ -5,7 +5,7 @@ import TARGET from './constants';
 
 const initialState = {
   [TARGET]: {
-    isVisible: false, title: null, type: null, values: null,
+    isVisible: false, element: null, type: null, values: null,
   },
 };
 
