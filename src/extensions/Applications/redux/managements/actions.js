@@ -21,6 +21,7 @@ export const actionCreators = {
       withPostSuccess(async (dispatch) => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
+        dispatch(actionCreators.getManagements());
       }),
       withPostFailure((dispatch, response) => {
         throw new SubmissionError({ _error: response });
@@ -48,6 +49,7 @@ export const actionCreators = {
       withPostSuccess(async (dispatch) => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
+        dispatch(actionCreators.getManagements());
       }),
       withPostFailure((dispatch, response) => {
         throw new SubmissionError({ _error: response });
@@ -63,6 +65,7 @@ export const actionCreators = {
       withPostSuccess(async (dispatch) => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
+        dispatch(actionCreators.getManagements());
       }),
       withPostFailure((dispatch, response) => {
         throw new SubmissionError({ _error: response });
