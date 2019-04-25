@@ -2,7 +2,9 @@ import * as SDK from 'azure-devops-extension-sdk';
 import hash from 'object-hash';
 import { getDateFull } from '../app/utils';
 
-export const createKeyHash = value => hash(value);
+export const createKeyHash = (value) => {
+  return hash(value);
+};
 
 export async function getDataManager() {
   await SDK.ready();

@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <>
         <CustomDialog />
-        <Main data={SampleData} />
+        <Main data={managements} />
       </>
     );
   }

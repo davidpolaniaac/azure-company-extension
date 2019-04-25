@@ -22,7 +22,7 @@ export async function updateDocument(documentName, value) {
   const dataManager = await getDataManager();
   const newValue = { name: value[GENERIC_FIELDS.NEW_NAME] };
   const data = await normalizeData(newValue);
-  const oldId = createKeyHash(value[GENERIC_FIELDS.NAME]);
+  const oldId = createKeyHash({ name: value[GENERIC_FIELDS.NAME] });
   await dataManager.deleteDocument(documentName, oldId);
   return dataManager.createDocument(documentName, data);
 }
