@@ -24,7 +24,7 @@ const newMasterPanelContent = {
   renderHeader: parentItem => (
 
     <MasterPanelHeader
-      title={parentItem.application}
+      title={parentItem.name}
       subTitle={`Created by ${parentItem.userName}`}
     />
   ),

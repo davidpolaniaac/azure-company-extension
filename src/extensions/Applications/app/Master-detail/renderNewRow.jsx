@@ -17,7 +17,7 @@ function renderNewRow(
       <div className="flex-row flex-center h-scroll-hidden" style={{ padding: '10px 0px' }}>
         <div className="flex-noshrink" style={{ width: '56px' }} />
         <div className="flex-column flex-shrink" style={{ minWidth: 0 }}>
-          <div className="primary-text text-ellipsis">{item.component}</div>
+          <div className="primary-text text-ellipsis">{item.name}</div>
           <div className="secondary-text">{item.userName}</div>
         </div>
       </div>
