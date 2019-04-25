@@ -1,5 +1,5 @@
 export default {
-  MANAGEMENT: {
-    CREATE_MANAGEMENT: 'createManagement',
+  FORM: {
+    GENERIC: 'generic',
   },
 };

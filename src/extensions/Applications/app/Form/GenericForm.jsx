@@ -5,10 +5,11 @@ import { Button } from 'azure-devops-ui/Button';
 import PropTypes from 'prop-types';
 import { ButtonGroup } from 'azure-devops-ui/ButtonGroup';
 import { FormItem } from 'azure-devops-ui/FormItem';
+import { capitalize } from '../utils';
 import FORM_NAMES from '../../constants/formNames';
-import { MANAGEMENT_FIELDS } from '../../constants/fields';
+import { GENERIC_FIELDS } from '../../constants/fields';
 
-const ManagementName = props => (
+const Name = props => (
 
   <FormItem message={props.meta.touched && props.meta.error} error={props.meta.touched && props.meta.error}>
 
@@ -23,7 +24,7 @@ const ManagementName = props => (
 );
 
 
-ManagementName.propTypes = {
+Name.propTypes = {
   meta: PropTypes.element.isRequired,
   input: PropTypes.element.isRequired,
   label: PropTypes.string.isRequired,
@@ -32,33 +33,46 @@ ManagementName.propTypes = {
 const validate = (values) => {
   const errors = {};
 
-  if (!values.management) {
-    errors.management = 'required';
-  } else if (values.management.length < 5) {
-    errors.management = 'must be at least 5 characters';
-  } else if (values.management.length > 80) {
-    errors.management = 'must be less than 80 characters';
-  }
-  
+  Object.keys(values).forEach((key) => {
+    if (!values[key]) {
+      errors[key] = 'required';
+    } else if (values[key].length < 5) {
+      errors[key] = 'must be at least 5 characters';
+    } else if (values[key].length > 80) {
+      errors[key] = 'must be less than 80 characters';
+    }
+  });
+
   return errors;
 };
 
 
-const CreateManagement = props => (
+const GenericForm = props => (
 
   <form onSubmit={props.handleSubmit}>
     <Field
-      name={MANAGEMENT_FIELDS.NAME}
-      label="Management Name"
-      component={ManagementName}
+      name={GENERIC_FIELDS.NAME}
+      label={`${props.textField} name`}
+      component={Name}
       type="text"
     />
-    <br />
+
+    { props.update &&
+    <>
+      <br />
+      <Field
+        name={GENERIC_FIELDS.NEW_NAME}
+        label={`new name of the ${props.textField}`}
+        component={Name}
+        type="text"
+      />
+    </>
+    }
     <br />
     <div>
       <ButtonGroup>
         <Button
-          text="Save"
+          text={capitalize(props.titleButton)}
           primary
           type="submit"
           onClick={() => props.handleSubmit(props.onSubmit)}
@@ -75,7 +89,10 @@ const CreateManagement = props => (
 );
 
 
-CreateManagement.propTypes = {
+GenericForm.propTypes = {
+  update: PropTypes.bool,
+  titleButton: PropTypes.string.isRequired,
+  textField: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onDismiss: PropTypes.func.isRequired,
@@ -83,6 +100,6 @@ CreateManagement.propTypes = {
 
 
 export default reduxForm({
-  form: FORM_NAMES.MANAGEMENT.CREATE_MANAGEMENT,
+  form: FORM_NAMES.FORM.GENERIC,
   validate,
-})(CreateManagement);
+})(GenericForm);

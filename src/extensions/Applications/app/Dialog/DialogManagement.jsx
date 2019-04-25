@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionCreators as managementActions } from '../../redux/managements/actions';
-import CreateManagement from '../Form/CreateManagement';
+import GenericForm from '../Form/GenericForm';
 import { ACTIONS } from '../../constants/actions';
+import { ELEMENTS } from '../../constants/elements';
 
 class DialogManagement extends React.Component {
   onCreate = (values) => {
@@ -39,7 +40,13 @@ class DialogManagement extends React.Component {
     const onSubmit = this.getSubmit(action);
 
     return (
-      <CreateManagement onSubmit={onSubmit} onDismiss={onDismiss} />
+      <GenericForm
+        onSubmit={onSubmit}
+        onDismiss={onDismiss}
+        titleButton={action}
+        textField={ELEMENTS.MANAGEMENT}
+        update={action === ACTIONS.UPDATE}
+      />
     );
   }
 }

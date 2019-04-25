@@ -1,8 +1,9 @@
 import React from 'react';
 import { Page } from 'azure-devops-ui/Page';
 import { Card } from 'azure-devops-ui/Card';
-import commandBarItemsComponent from './commandBarItemsComponent';
+import commandBarItems from './commandBarItems';
 import CustomHeader from '../components/CustomHeader';
+import { ELEMENTS } from '../../constants/elements';
 
 const newDetailsContent = {
   renderContent: item => (
@@ -10,7 +11,8 @@ const newDetailsContent = {
       <CustomHeader
         title={item.component}
         description={item.userName}
-        CommandBarItems={commandBarItemsComponent}
+        CommandBarItems={commandBarItems}
+        element={ELEMENTS.COMPONENT}
       />
       <div className="page-content page-content-top">
         <Card

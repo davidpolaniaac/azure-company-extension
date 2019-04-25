@@ -14,7 +14,6 @@ export async function getDataManager() {
 export async function normalizeData(value) {
   await SDK.ready();
   const userName = SDK.getUser().displayName;
-  console.log('crear hash', value);
   const id = createKeyHash(value);
   const date = getDateFull();
   const data = {

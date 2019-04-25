@@ -1,4 +1,6 @@
-const commandBarItemsApplication = showDialog => [
+import { ACTIONS } from '../../constants/actions';
+
+const commandBarItems = (showDialog, element) => [
   {
     iconProps: {
       iconName: 'Add',
@@ -6,11 +8,11 @@ const commandBarItemsApplication = showDialog => [
     id: 'create',
     important: false,
     onActivate: () => {
-      showDialog('Create application', 'createapplication');
+      showDialog(element, ACTIONS.CREATE);
     },
-    text: 'New application',
+    text: `New ${element}`,
     tooltipProps: {
-      text: 'New application',
+      text: `${element}`,
     },
   },
   {
@@ -20,9 +22,9 @@ const commandBarItemsApplication = showDialog => [
     id: 'delete',
     important: false,
     onActivate: () => {
-      showDialog('Delete application', 'deleteapplication');
+      showDialog(element, ACTIONS.DELETE);
     },
-    text: 'Delete application',
+    text: `Delete ${element}`,
   },
   {
     iconProps: {
@@ -31,10 +33,10 @@ const commandBarItemsApplication = showDialog => [
     id: 'update',
     important: false,
     onActivate: () => {
-      showDialog('Update application', 'updateapplication');
+      showDialog(element, ACTIONS.UPDATE);
     },
-    text: 'Update application',
+    text: `Update ${element}`,
   },
 ];
 
-export default commandBarItemsApplication;
+export default commandBarItems;

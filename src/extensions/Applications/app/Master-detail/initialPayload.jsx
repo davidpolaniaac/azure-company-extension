@@ -5,7 +5,9 @@ import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import InitialMasterPanelContent from './InitialMasterPanelContent';
 import CustomHeader from '../components/CustomHeader';
 import InitialDetailView from './InitialDetailView';
-import commandBarItemsManagement from './commandBarItemsManagement';
+import commandBarItems from './commandBarItems';
+import { ELEMENTS } from '../../constants/elements';
+
 
 function initialPayload(data) {
   return ({
@@ -15,7 +17,7 @@ function initialPayload(data) {
         <InitialMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} data={data || []} />
       ),
       renderHeader: () => (
-        <CustomHeader CommandBarItems={commandBarItemsManagement} title="Mgmt" />
+        <CustomHeader CommandBarItems={commandBarItems} element={ELEMENTS.MANAGEMENT} title="Mgmt" />
       ),
       renderSearch: () => (
         <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search managerment" />

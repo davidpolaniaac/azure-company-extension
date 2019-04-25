@@ -3,4 +3,3 @@ export const ACTIONS = {
   DELETE: 'delete',
   UPDATE: 'update',
 };
-
