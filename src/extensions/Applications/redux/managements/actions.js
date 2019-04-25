@@ -3,9 +3,11 @@ import { SubmissionError, reset } from 'redux-form';
 import FORM_NAMES from '../../constants/formNames';
 import managementServices from '../../service/management';
 import { MANAGEMENTS } from './constants';
-import { CREATE_TARGET } from '../constants';
+import { CREATE_TARGET, DELETE_TARGET, UPDATE_TARGET } from '../constants';
+import { actionCreators as dialogActions } from '../dialog/actions';
 
-const completedTypes = completeTypes(['ADD_INFO', 'GET_INFO']);
+
+const completedTypes = completeTypes(['ADD_INFO', 'GET_INFO', 'DELETE_INFO', 'UPDATE_INFO']);
 
 export const actions = createTypes(completedTypes, '@@MANAGEMENT');
 
@@ -18,6 +20,7 @@ export const actionCreators = {
     injections: [
       withPostSuccess(async (dispatch) => {
         dispatch(reset(FORM_NAMES.MANAGEMENT.CREATE_MANAGEMENT));
+        dispatch(dialogActions.dismissDialog());
       }),
       withPostFailure((dispatch, response) => {
         throw new SubmissionError({ _error: response });
@@ -33,6 +36,36 @@ export const actionCreators = {
     injections: [
       withPostFailure((dispatch, response) => {
         console.log('ERROR GET MANAGEMENTS :', response);
+      }),
+    ],
+  }),
+  deleteManagement: values => ({
+    type: actions.DELETE_INFO,
+    target: DELETE_TARGET,
+    service: managementServices.deleteDocument,
+    payload: values,
+    injections: [
+      withPostSuccess(async (dispatch) => {
+        dispatch(reset(FORM_NAMES.MANAGEMENT.CREATE_MANAGEMENT));
+        dispatch(dialogActions.dismissDialog());
+      }),
+      withPostFailure((dispatch, response) => {
+        throw new SubmissionError({ _error: response });
+      }),
+    ],
+  }),
+  updateManagement: values => ({
+    type: actions.UPDATE_INFO,
+    target: UPDATE_TARGET,
+    service: managementServices.updateDocument,
+    payload: values,
+    injections: [
+      withPostSuccess(async (dispatch) => {
+        dispatch(reset(FORM_NAMES.MANAGEMENT.CREATE_MANAGEMENT));
+        dispatch(dialogActions.dismissDialog());
+      }),
+      withPostFailure((dispatch, response) => {
+        throw new SubmissionError({ _error: response });
       }),
     ],
   }),

@@ -32,14 +32,14 @@ ManagementName.propTypes = {
 const validate = (values) => {
   const errors = {};
 
-  if (!values.ManagementName) {
-    errors.ManagementName = 'required';
-  } else if (values.ManagementName.length < 5) {
-    errors.ManagementName = 'must be at least 5 characters';
-  } else if (values.ManagementName.length > 80) {
-    errors.ManagementName = 'must be less than 80 characters';
+  if (!values.management) {
+    errors.management = 'required';
+  } else if (values.management.length < 5) {
+    errors.management = 'must be at least 5 characters';
+  } else if (values.management.length > 80) {
+    errors.management = 'must be less than 80 characters';
   }
-
+  
   return errors;
 };
 
