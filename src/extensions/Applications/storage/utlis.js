@@ -1,25 +1,25 @@
 import * as SDK from 'azure-devops-extension-sdk';
-import hash from 'object-hash';
 import { getDateFull } from '../app/utils';
-
-export const createKeyHash = (value) => {
-  return hash(value);
-};
+import { GENERIC_FIELDS } from '../constants/fields';
 
 export async function getDataManager() {
-  await SDK.ready();
   const accessToken = await SDK.getAccessToken();
   const service = await SDK.getService('ms.vss-features.extension-data-service');
   return service.getExtensionDataManager(SDK.getExtensionContext().id, accessToken);
 }
 
+export async function getDocumentByName(collectionName, value) {
+  const dataManager = await getDataManager();
+  const docuemnts = await dataManager.getDocuments(collectionName);
+  const data = docuemnts.find(document => document[GENERIC_FIELDS.NAME] === value);
+  return data;
+}
+
 export async function normalizeData(value) {
-  await SDK.ready();
   const userName = SDK.getUser().displayName;
-  const id = createKeyHash(value);
   const date = getDateFull();
   const data = {
-    id, userName, date, ...value,
+    userName, date, ...value,
   };
   return data;
 }
