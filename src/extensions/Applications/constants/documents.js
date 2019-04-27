@@ -3,3 +3,4 @@ export const DOCUMENTS = {
   APPLICATIONS: 'applications',
   COMPONENTS: 'components',
 };
+
