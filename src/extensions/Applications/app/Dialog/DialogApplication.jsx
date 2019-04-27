@@ -8,18 +8,18 @@ import { ELEMENTS } from '../../constants/elements';
 
 class DialogApplication extends React.Component {
   onCreate = (values) => {
-    const { createApplication } = this.props;
-    return createApplication(values);
+    const { createApplication, management } = this.props;
+    return createApplication(management, values);
   }
 
   onDelete = (values) => {
-    const { deleteApplication } = this.props;
-    return deleteApplication(values);
+    const { deleteApplication, management } = this.props;
+    return deleteApplication(management, values);
   }
 
   onUpdate = (values) => {
-    const { updateApplication } = this.props;
-    return updateApplication(values);
+    const { updateApplication, management } = this.props;
+    return updateApplication(management, values);
   }
 
   getSubmit(action) {
@@ -38,7 +38,7 @@ class DialogApplication extends React.Component {
   render() {
     const { onDismiss, action } = this.props;
     const onSubmit = this.getSubmit(action);
-    console.log('onSubmit :', onSubmit);
+
     return (
       <GenericForm
         onSubmit={onSubmit}
@@ -57,12 +57,17 @@ DialogApplication.propTypes = {
   deleteApplication: PropTypes.func.isRequired,
   updateApplication: PropTypes.func.isRequired,
   onDismiss: PropTypes.func.isRequired,
+  management: PropTypes.string.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  createApplication: values => dispatch(applicationActions.createApplication(values)),
-  deleteApplication: values => dispatch(applicationActions.deleteApplication(values)),
-  updateApplication: values => dispatch(applicationActions.updateApplication(values)),
+const mapStateToProps = state => ({
+  management: state.managements.management,
 });
 
-export default connect(null, mapDispatchToProps)(DialogApplication);
+const mapDispatchToProps = dispatch => ({
+  createApplication: (management, values) => dispatch(applicationActions.createApplication(management, values)),
+  deleteApplication: (management, values) => dispatch(applicationActions.deleteApplication(management, values)),
+  updateApplication: (management, values) => dispatch(applicationActions.updateApplication(management, values)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DialogApplication);
