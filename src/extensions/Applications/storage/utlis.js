@@ -9,10 +9,14 @@ export async function getDataManager() {
 }
 
 export async function getDocumentByName(collectionName, value) {
-  const dataManager = await getDataManager();
-  const docuemnts = await dataManager.getDocuments(collectionName);
-  const data = docuemnts.find(document => document[GENERIC_FIELDS.NAME] === value);
-  return data;
+  try {
+    const dataManager = await getDataManager();
+    const docuemnts = await dataManager.getDocuments(collectionName);
+    const data = docuemnts.find(document => document[GENERIC_FIELDS.NAME] === value);
+    return data;
+  } catch (error) {
+    return undefined;
+  }
 }
 
 export async function normalizeData(value) {

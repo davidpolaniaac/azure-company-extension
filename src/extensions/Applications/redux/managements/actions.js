@@ -25,7 +25,7 @@ export const actionCreators = {
         dispatch(actionCreators.getManagements());
       }),
       withPostFailure((dispatch, response) => {
-        throw new SubmissionError({ _error: response });
+        throw new SubmissionError({ _error: response.message });
       }),
     ],
   }),
@@ -54,7 +54,7 @@ export const actionCreators = {
         dispatch(actionCreators.getManagements());
       }),
       withPostFailure((dispatch, response) => {
-        throw new SubmissionError({ _error: response });
+        throw new SubmissionError({ _error: response.message });
       }),
     ],
   }),
@@ -70,14 +70,17 @@ export const actionCreators = {
         dispatch(actionCreators.getManagements());
       }),
       withPostFailure((dispatch, response) => {
-        throw new SubmissionError({ _error: response });
+        throw new SubmissionError({ _error: response.message });
       }),
     ],
   }),
-  setManagement: values => dispatch =>
+  setManagement: values => (dispatch) => {
+    console.log(values);
     dispatch({
       type: actions.SET_INFO,
       target: MANAGEMENT,
       payload: values,
-    }),
+    });
+  }
+  ,
 };

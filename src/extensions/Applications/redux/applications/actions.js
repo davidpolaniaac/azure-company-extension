@@ -12,18 +12,19 @@ const completedTypes = completeTypes(['ADD_INFO', 'GET_INFO', 'DELETE_INFO', 'UP
 export const actions = createTypes(completedTypes, '@@APPLICATION');
 
 export const actionCreators = {
-  createApplication: values => (dispatch, getState) => ({
+  createApplication: (collection, values) => ({
     type: actions.ADD_INFO,
     target: CREATE_TARGET,
     service: applicationServices.createDocument,
-    payload: normalizeValue(getState().managements.management, values),
+    payload: normalizeValue(collection, values),
     injections: [
-      withPostSuccess((dispatchInjections) => {
-        dispatchInjections(reset(FORM_NAMES.FORM.GENERIC));
-        dispatchInjections(dialogActions.dismissDialog());
+      withPostSuccess((dispatch) => {
+        dispatch(reset(FORM_NAMES.FORM.GENERIC));
+        dispatch(actionCreators.getApplications(collection));
+        dispatch(dialogActions.dismissDialog());
       }),
       withPostFailure((_, response) => {
-        throw new SubmissionError({ _error: response });
+        throw new SubmissionError({ _error: response.message });
       }),
     ],
   }),
@@ -40,33 +41,35 @@ export const actionCreators = {
       }),
     ],
   }),
-  deleteApplication: values => (dispatch, getState) => ({
+  deleteApplication: (collection, values) => ({
     type: actions.DELETE_INFO,
     target: DELETE_TARGET,
     service: applicationServices.deleteDocument,
-    payload: normalizeValue(getState().managements.management, values),
+    payload: normalizeValue(collection, values),
     injections: [
-      withPostSuccess(async () => {
+      withPostSuccess((dispatch) => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
+        dispatch(actionCreators.getApplications(collection));
         dispatch(dialogActions.dismissDialog());
       }),
       withPostFailure((_, response) => {
-        throw new SubmissionError({ _error: response });
+        throw new SubmissionError({ _error: response.message });
       }),
     ],
   }),
-  updateApplication: values => (dispatch, getState) => ({
+  updateApplication: (collection, values) => ({
     type: actions.UPDATE_INFO,
     target: UPDATE_TARGET,
     service: applicationServices.updateDocument,
-    payload: normalizeValue(getState().managements.management, values),
+    payload: normalizeValue(collection, values),
     injections: [
-      withPostSuccess(async () => {
+      withPostSuccess((dispatch) => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
+        dispatch(actionCreators.getApplications(collection));
         dispatch(dialogActions.dismissDialog());
       }),
       withPostFailure((_, response) => {
-        throw new SubmissionError({ _error: response });
+        throw new SubmissionError({ _error: response.message });
       }),
     ],
   }),

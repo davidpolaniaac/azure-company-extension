@@ -7,7 +7,7 @@ import CustomDialog from './components/CustomDialog';
 import { actionCreators as managementsActions } from '../redux/managements/actions';
 
 class App extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     const { getManagements } = this.props;
     getManagements();
   }
