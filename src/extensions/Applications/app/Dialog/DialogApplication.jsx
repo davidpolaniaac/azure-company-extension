@@ -38,7 +38,7 @@ class DialogApplication extends React.Component {
   render() {
     const { onDismiss, action } = this.props;
     const onSubmit = this.getSubmit(action);
-
+    console.log('onSubmit :', onSubmit);
     return (
       <GenericForm
         onSubmit={onSubmit}

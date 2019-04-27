@@ -18,10 +18,9 @@ export const actionCreators = {
     service: applicationServices.createDocument,
     payload: normalizeValue(getState().managements.management, values),
     injections: [
-      withPostSuccess(() => {
-        dispatch(reset(FORM_NAMES.FORM.GENERIC));
-        dispatch(dialogActions.dismissDialog());
-        dispatch(actionCreators.getManagements());
+      withPostSuccess((dispatchInjections) => {
+        dispatchInjections(reset(FORM_NAMES.FORM.GENERIC));
+        dispatchInjections(dialogActions.dismissDialog());
       }),
       withPostFailure((_, response) => {
         throw new SubmissionError({ _error: response });
@@ -50,7 +49,6 @@ export const actionCreators = {
       withPostSuccess(async () => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
-        dispatch(actionCreators.getManagements());
       }),
       withPostFailure((_, response) => {
         throw new SubmissionError({ _error: response });
@@ -66,16 +64,16 @@ export const actionCreators = {
       withPostSuccess(async () => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
-        dispatch(actionCreators.getManagements());
       }),
       withPostFailure((_, response) => {
         throw new SubmissionError({ _error: response });
       }),
     ],
   }),
-  getApplication: values => ({
-    type: actions.SET_INFO,
-    target: APPLICATION,
-    payload: values,
-  }),
+  getApplication: values => dispatch =>
+    dispatch({
+      type: actions.SET_INFO,
+      target: APPLICATION,
+      payload: values,
+    }),
 };
