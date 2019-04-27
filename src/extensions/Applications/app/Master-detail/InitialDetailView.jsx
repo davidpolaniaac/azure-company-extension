@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { MasterDetailsContext } from 'azure-devops-ui/MasterDetailsContext';
 import { SimpleTableCell, Table, TwoLineTableCell } from 'azure-devops-ui/Table';
 import { ObservableValue } from 'azure-devops-ui/Core/Observable';
@@ -11,10 +12,18 @@ import newDetailsContent from './newDetailsContent';
 import commandBarItems from './commandBarItems';
 import CustomHeader from '../components/CustomHeader';
 import { ELEMENTS } from '../../constants/elements';
+import { actionCreators as applicationsActions } from '../../redux/applications/actions';
+import { actionCreators as managementsActions } from '../../redux/managements/actions';
+
 
 function InitialDetailView(props) {
   const masterDetailsContext = React.useContext(MasterDetailsContext);
-  const { detailItem } = props;
+  const {
+    detailItem, getApplications, applications, setManagement,
+  } = props;
+
+  setManagement(detailItem.id);
+  getApplications(detailItem.id);
 
   const renderCommitNameCell = (
     rowIndex,
@@ -69,7 +78,7 @@ function InitialDetailView(props) {
   const onRowActivated = (event, tableRow) => {
     const item = tableRow.data.components && tableRow.data.components[0] ? tableRow.data.components[0] : {};
     const newPayload = {
-      key: 'commit-details',
+      key: 'components-details',
       masterPanelContent: newMasterPanelContent,
       detailsContent: newDetailsContent,
       selectedMasterItem: new ObservableValue(item),
@@ -95,7 +104,7 @@ function InitialDetailView(props) {
         >
           <Table
             columns={columns}
-            itemProvider={new ArrayItemProvider(detailItem.applications || [])}
+            itemProvider={new ArrayItemProvider(applications)}
             showLines
             singleClickActivation
             onActivate={onRowActivated}
@@ -108,6 +117,18 @@ function InitialDetailView(props) {
 
 InitialDetailView.propTypes = {
   detailItem: PropTypes.element.isRequired,
+  getApplications: PropTypes.func.isRequired,
+  setManagement: PropTypes.func.isRequired,
+  applications: PropTypes.arrayOf(PropTypes.shape()),
 };
 
-export default InitialDetailView;
+const mapStateToProps = state => ({
+  applications: state.applications.applications,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getApplications: managementId => dispatch(applicationsActions.getApplications(managementId)),
+  setManagement: managementId => dispatch(managementsActions.setManagement(managementId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(InitialDetailView);

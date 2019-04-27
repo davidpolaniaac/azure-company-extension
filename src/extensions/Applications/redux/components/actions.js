@@ -1,83 +1,76 @@
 import { completeTypes, createTypes, withPostSuccess, withPostFailure } from 'redux-recompose';
 import { SubmissionError, reset } from 'redux-form';
 import FORM_NAMES from '../../constants/formNames';
-import managementServices from '../../service/documents';
-import { MANAGEMENTS, MANAGEMENT } from './constants';
+import componentServices from '../../service/documents';
+import { COMPONENTS } from './constants';
 import { CREATE_TARGET, DELETE_TARGET, UPDATE_TARGET } from '../constants';
 import { actionCreators as dialogActions } from '../dialog/actions';
 import { normalizeValue } from '../../schema/document';
-import { DOCUMENTS } from '../../constants/documents';
 
-const completedTypes = completeTypes(['ADD_INFO', 'GET_INFO', 'DELETE_INFO', 'UPDATE_INFO'], ['SET_INFO']);
+const completedTypes = completeTypes(['ADD_INFO', 'GET_INFO', 'DELETE_INFO', 'UPDATE_INFO']);
 
-export const actions = createTypes(completedTypes, '@@MANAGEMENT');
+export const actions = createTypes(completedTypes, '@@COMPONENT');
 
 export const actionCreators = {
-  createManagement: values => ({
+  createComponent: values => (dispatch, getState) => ({
     type: actions.ADD_INFO,
     target: CREATE_TARGET,
-    service: managementServices.createDocument,
-    payload: normalizeValue(DOCUMENTS.MANAGEMENTS, values),
+    service: componentServices.createDocument,
+    payload: normalizeValue(getState().applications.application, values),
     injections: [
-      withPostSuccess(async (dispatch) => {
+      withPostSuccess(() => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
         dispatch(actionCreators.getManagements());
       }),
-      withPostFailure((dispatch, response) => {
+      withPostFailure((_, response) => {
         throw new SubmissionError({ _error: response });
       }),
     ],
   }),
-  getManagements: () => ({
+  getComponents: values => ({
     type: actions.GET_INFO,
-    target: MANAGEMENTS,
-    service: managementServices.getDocuments,
-    payload: DOCUMENTS.MANAGEMENTS,
+    target: COMPONENTS,
+    service: componentServices.getDocuments,
+    payload: values,
     failureSelector: response => response.code,
     successSelector: response => response.data,
     injections: [
       withPostFailure((dispatch, response) => {
-        console.log('ERROR GET MANAGEMENTS :', response);
+        console.log('ERROR GET COMPONENTS :', response);
       }),
     ],
   }),
-  deleteManagement: values => ({
+  deleteComponent: values => (dispatch, getState) => ({
     type: actions.DELETE_INFO,
     target: DELETE_TARGET,
-    service: managementServices.deleteDocument,
-    payload: normalizeValue(DOCUMENTS.MANAGEMENTS, values),
+    service: componentServices.deleteDocument,
+    payload: normalizeValue(getState().applications.application, values),
     injections: [
-      withPostSuccess(async (dispatch) => {
+      withPostSuccess(() => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
         dispatch(actionCreators.getManagements());
       }),
-      withPostFailure((dispatch, response) => {
+      withPostFailure((_, response) => {
         throw new SubmissionError({ _error: response });
       }),
     ],
   }),
-  updateManagement: values => ({
+  updateComponent: values => (dispatch, getState) => ({
     type: actions.UPDATE_INFO,
     target: UPDATE_TARGET,
-    service: managementServices.updateDocument,
-    payload: normalizeValue(DOCUMENTS.MANAGEMENTS, values),
+    service: componentServices.updateDocument,
+    payload: normalizeValue(getState().applications.application, values),
     injections: [
-      withPostSuccess(async (dispatch) => {
+      withPostSuccess(() => {
         dispatch(reset(FORM_NAMES.FORM.GENERIC));
         dispatch(dialogActions.dismissDialog());
         dispatch(actionCreators.getManagements());
       }),
-      withPostFailure((dispatch, response) => {
+      withPostFailure((_, response) => {
         throw new SubmissionError({ _error: response });
       }),
     ],
   }),
-  setManagement: values => dispatch =>
-    dispatch({
-      type: actions.SET_INFO,
-      target: MANAGEMENT,
-      payload: values,
-    }),
 };
