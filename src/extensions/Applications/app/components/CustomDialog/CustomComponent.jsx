@@ -9,9 +9,9 @@ function CustomComponent(props) {
     case ELEMENTS.MANAGEMENT:
       return <DialogManagement onDismiss={props.DismissDialog} action={props.Type} />;
     case ELEMENTS.APPLICATION:
-      return <DialogApplication onDismiss={props.dismissDialog} action={props.Type} />;
+      return <DialogApplication onDismiss={props.DismissDialog} action={props.Type} />;
     case ELEMENTS.COMPONENT:
-      return <DialogManagement onDismiss={props.dismissDialog} action={props.Type} />;
+      return <DialogManagement onDismiss={props.DismissDialog} action={props.Type} />;
     default:
       return null;
   }

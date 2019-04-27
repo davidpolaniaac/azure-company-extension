@@ -8,6 +8,7 @@ import { FormItem } from 'azure-devops-ui/FormItem';
 import { capitalize } from '../utils';
 import FORM_NAMES from '../../constants/formNames';
 import { GENERIC_FIELDS } from '../../constants/fields';
+import CustomFormFooter from '../components/CustomFormFooter';
 
 const Name = props => (
 
@@ -70,18 +71,7 @@ const GenericForm = props => (
     }
     <br />
     <div>
-      <ButtonGroup>
-        <Button
-          text={capitalize(props.titleButton)}
-          primary
-          type="submit"
-          onClick={() => props.handleSubmit(props.onSubmit)}
-        />
-        <Button
-          text="Cancel"
-          onClick={props.onDismiss}
-        />
-      </ButtonGroup>
+      <CustomFormFooter {...props} />
     </div>
 
   </form>
