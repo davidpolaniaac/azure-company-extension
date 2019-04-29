@@ -19,7 +19,7 @@ function initialPayload(data, value, setManagement, getApplications) {
         <CustomHeader CommandBarItems={commandBarItems} element={ELEMENTS.MANAGEMENT} title="Managements" />
       ),
       renderSearch: () => (
-        <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search managerment" />
+        <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search management" />
       ),
       onBackButtonClick: () => false,
     },
