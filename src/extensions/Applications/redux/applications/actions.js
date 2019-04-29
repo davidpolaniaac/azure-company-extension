@@ -73,7 +73,7 @@ export const actionCreators = {
       }),
     ],
   }),
-  getApplication: values => dispatch =>
+  setApplication: values => dispatch =>
     dispatch({
       type: actions.SET_INFO,
       target: APPLICATION,
