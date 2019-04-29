@@ -5,7 +5,7 @@ import { MasterPanelHeader } from 'azure-devops-ui/MasterDetails';
 import NewMasterPanelContent from './NewMasterPanelContent';
 import NewDetailsContent from './NewDetailsContent';
 
-function newPayload(parent, initialValue) {
+function newPayload(parent) {
   return ({
     key: 'components-details',
     masterPanelContent: {
@@ -26,7 +26,7 @@ function newPayload(parent, initialValue) {
     detailsContent: {
       renderContent: item => <NewDetailsContent item={item} />,
     },
-    selectedMasterItem: new ObservableValue(initialValue),
+    selectedMasterItem: new ObservableValue({}),
     parentItem: parent,
   });
 }
