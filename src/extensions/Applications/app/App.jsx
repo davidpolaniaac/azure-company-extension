@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SampleData from './data.json';
 import Main from './Master-detail/Main';
 import CustomDialog from './components/CustomDialog';
 import { actionCreators as managementsActions } from '../redux/managements/actions';

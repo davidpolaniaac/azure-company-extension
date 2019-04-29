@@ -7,19 +7,18 @@ import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import { ArrayItemProvider } from 'azure-devops-ui/Utilities/Provider';
 import { Page } from 'azure-devops-ui/Page';
 import { Card } from 'azure-devops-ui/Card';
-import newMasterPanelContent from './newMasterPanelContent';
-import newDetailsContent from './newDetailsContent';
+import newPayload from './newPayload';
 import commandBarItems from './commandBarItems';
 import CustomHeader from '../components/CustomHeader';
 import { ELEMENTS } from '../../constants/elements';
 import { actionCreators as applicationsActions } from '../../redux/applications/actions';
-import { actionCreators as managementsActions } from '../../redux/managements/actions';
+import { actionCreators as componentsActions } from '../../redux/components/actions';
 
 
 function InitialDetailView(props) {
   const masterDetailsContext = React.useContext(MasterDetailsContext);
   const {
-    detailItem, applications,
+    detailItem, applications, setApplication, getComponents, components,
   } = props;
 
   const renderCommitNameCell = (
@@ -72,17 +71,11 @@ function InitialDetailView(props) {
     },
   ];
 
-  const onRowActivated = (event, tableRow) => {
-    const item = tableRow.data.components && tableRow.data.components[0] ? tableRow.data.components[0] : {};
-    const newPayload = {
-      key: 'components-details',
-      masterPanelContent: newMasterPanelContent,
-      detailsContent: newDetailsContent,
-      selectedMasterItem: new ObservableValue(item),
-      parentItem: tableRow.data,
-    };
-
-    masterDetailsContext.push(newPayload);
+  const onRowActivated = async (event, tableRow) => {
+    setApplication(tableRow.data.id);
+    await getComponents(tableRow.data.id);
+    const newView = newPayload(tableRow.data, components[0] || {});
+    masterDetailsContext.push(newView);
   };
 
   return (
@@ -115,15 +108,19 @@ function InitialDetailView(props) {
 InitialDetailView.propTypes = {
   detailItem: PropTypes.element.isRequired,
   applications: PropTypes.arrayOf(PropTypes.shape()),
+  setApplication: PropTypes.func.isRequired,
+  getComponents: PropTypes.func.isRequired,
+  components: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 const mapStateToProps = state => ({
   applications: state.applications.applications,
+  components: state.components.components,
 });
 
 const mapDispatchToProps = dispatch => ({
-  getApplications: managementId => dispatch(applicationsActions.getApplications(managementId)),
-  setManagement: managementId => dispatch(managementsActions.setManagement(managementId)),
+  setApplication: applicationId => dispatch(applicationsActions.setApplication(applicationId)),
+  getComponents: applicationId => dispatch(componentsActions.getComponents(applicationId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitialDetailView);

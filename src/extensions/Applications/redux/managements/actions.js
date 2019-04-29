@@ -75,7 +75,6 @@ export const actionCreators = {
     ],
   }),
   setManagement: values => (dispatch) => {
-    console.log(values);
     dispatch({
       type: actions.SET_INFO,
       target: MANAGEMENT,
