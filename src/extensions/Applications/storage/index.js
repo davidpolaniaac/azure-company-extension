@@ -2,8 +2,6 @@ import { getDataManager, normalizeData, getDocumentByName } from './utlis';
 import { GENERIC_FIELDS } from '../constants/fields';
 
 export async function createDocumentStorage(collectionName, value) {
-  console.log('collectionName', collectionName);
-  console.log('value', value);
   const dataManager = await getDataManager();
   let data = await getDocumentByName(collectionName, value[GENERIC_FIELDS.NAME]);
   data = typeof (data) === 'undefined' ? await normalizeData(value) : undefined;
@@ -12,7 +10,12 @@ export async function createDocumentStorage(collectionName, value) {
 
 export async function getDocumentsStorage(collectionName) {
   const dataManager = await getDataManager();
-  return dataManager.getDocuments(collectionName);
+  try {
+    const values = await dataManager.getDocuments(collectionName);
+    return values;
+  } catch (error) {
+    return [];
+  }
 }
 
 export async function deleteDocumentStorage(collectionName, value) {
