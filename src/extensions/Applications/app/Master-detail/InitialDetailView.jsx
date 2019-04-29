@@ -18,7 +18,7 @@ import { actionCreators as componentsActions } from '../../redux/components/acti
 function InitialDetailView(props) {
   const masterDetailsContext = React.useContext(MasterDetailsContext);
   const {
-    detailItem, applications, setApplication, getComponents, components,
+    detailItem, applications, setApplication, getComponents,
   } = props;
 
   const renderCommitNameCell = (
@@ -74,7 +74,7 @@ function InitialDetailView(props) {
   const onRowActivated = async (event, tableRow) => {
     setApplication(tableRow.data.id);
     await getComponents(tableRow.data.id);
-    const newView = newPayload(tableRow.data, components[0] || {});
+    const newView = newPayload(tableRow.data);
     masterDetailsContext.push(newView);
   };
 
@@ -110,12 +110,10 @@ InitialDetailView.propTypes = {
   applications: PropTypes.arrayOf(PropTypes.shape()),
   setApplication: PropTypes.func.isRequired,
   getComponents: PropTypes.func.isRequired,
-  components: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 const mapStateToProps = state => ({
   applications: state.applications.applications,
-  components: state.components.components,
 });
 
 const mapDispatchToProps = dispatch => ({
