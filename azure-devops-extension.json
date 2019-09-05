@@ -4,6 +4,7 @@
     "publisher": "dpolania",
     "version": "1.0.523",
     "name": "Azure Company",
+    "baseUri": "https://localhost:3000",
     "description": "Create the structure of your applications",
     "categories": [
         "Azure Pipelines"
@@ -14,7 +15,8 @@
         }
     ],
     "scopes": [
-        "vso.work", "vso.code"
+        "vso.work",
+        "vso.code"
     ],
     "icons": {
         "default": "logo.png"

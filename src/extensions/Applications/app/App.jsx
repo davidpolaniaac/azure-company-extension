@@ -1,9 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Filter } from 'azure-devops-ui/Utilities/Filter';
 import Main from './Master-detail/Main';
 import CustomDialog from './components/CustomDialog';
 import { actionCreators as managementsActions } from '../redux/managements/actions';
+
+
+const dataTest = [
+  {
+    id: 'App 1',
+    name: 'Negocios A',
+    userName: 'David',
+    date: '2019-03-03',
+  },
+  {
+    id: 'App 2',
+    name: 'Negocios B',
+    userName: 'David',
+    date: '2019-03-03',
+  },
+  {
+    id: 'App 3',
+    name: 'Negocios C',
+    userName: 'David',
+    date: '2019-03-03',
+  },
+  {
+    id: 'App 4',
+    name: 'Negocios D',
+    userName: 'David',
+    date: '2019-03-03',
+  },
+  {
+    id: 'App 5',
+    name: 'Negocios E',
+    userName: 'David',
+    date: '2019-03-03',
+  },
+];
+
+const filter = new Filter();
 
 class App extends React.Component {
   componentWillMount() {
@@ -16,7 +53,7 @@ class App extends React.Component {
     return (
       <>
         <CustomDialog />
-        <Main data={managements} />
+        <Main data={managements} filter={filter} />
       </>
     );
   }
