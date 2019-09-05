@@ -8,9 +8,11 @@ import { actionCreators as managementsActions } from '../../redux/managements/ac
 import { actionCreators as applicationsActions } from '../../redux/applications/actions';
 
 function Main(props) {
-  const { data, setManagement, getApplications } = props;
+  const {
+    data, setManagement, getApplications, filter,
+  } = props;
   const masterDetailsContext = new BaseMasterDetailsContext(
-    initialPayload(data, data[0], setManagement, getApplications),
+    initialPayload(data, data[0], setManagement, getApplications, filter),
     () => {
       alert("Triggered onExit; this shouldn't happen ever in this app, Critical Error");
     },
