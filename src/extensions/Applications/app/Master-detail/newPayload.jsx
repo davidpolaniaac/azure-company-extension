@@ -2,8 +2,8 @@ import React from 'react';
 import { TextField } from 'azure-devops-ui/TextField';
 import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import { MasterPanelHeader } from 'azure-devops-ui/MasterDetails';
-import NewMasterPanelContent from './NewMasterPanelContent';
-import NewDetailsContent from './NewDetailsContent';
+import NewMasterPanelContent from './newMasterPanelContent';
+import NewDetailsContent from './newDetailsContent';
 
 function newPayload(parent) {
   return ({

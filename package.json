@@ -22,7 +22,7 @@
     "publish-extension": "tfx extension publish --manifest-globs azure-devops-extension.json src/extensions/**/*.json",
     "build:dev": "npm run compile:dev && npm run package:dev",
     "compile:dev": "npm run clean && webpack --mode development",
-    "package:dev": "npm run compile:dev && tfx extension create --manifest-globs azure-devops-extension.json src/extensions/**/*.json --overrides-file config/dev.json --output-path out",
+    "package:dev": "npm run compile:dev && tfx extension create --manifest-globs azure-devops-extension.json src/extensions/**/*.json --overrides-file config/dev.json --output-path out --rev-version",
     "publish:dev": "npm run compile:dev && tfx extension publish --manifest-globs azure-devops-extension.json src/extensions/**/*.json --overrides-file config/dev.json --output-path out",
     "start:dev": "webpack-dev-server --mode development"
   },
