@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Filter } from 'azure-devops-ui/Utilities/Filter';
 import Main from './Master-detail/Main';
 import CustomDialog from './components/CustomDialog';
 import { actionCreators as managementsActions } from '../redux/managements/actions';
@@ -40,8 +39,6 @@ const dataTest = [
   },
 ];
 
-const filter = new Filter();
-
 class App extends React.Component {
   componentWillMount() {
     const { getManagements } = this.props;
@@ -53,7 +50,7 @@ class App extends React.Component {
     return (
       <>
         <CustomDialog />
-        <Main data={managements} filter={filter} />
+        <Main data={managements} />
       </>
     );
   }
