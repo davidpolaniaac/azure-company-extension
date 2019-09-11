@@ -13,7 +13,7 @@ function newPayload(parent, data) {
     key: 'components-details',
     masterPanelContent: {
       renderContent: (parentItem, initialSelectedMasterItem) => (
-        <NewFilterMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} filter={filter} filterKey="keyword-detail" Component={MasterPanelContent} />
+        <NewFilterMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} data={data} filter={filter} filterKey="keyword-detail" Component={MasterPanelContent} />
       ),
       renderHeader: parentItem => (
 
