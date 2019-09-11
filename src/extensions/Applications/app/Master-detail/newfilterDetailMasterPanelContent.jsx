@@ -6,15 +6,17 @@ import { filterItems } from '../utils';
 
 
 function FilterMasterPanelContent(props) {
-  const [data, setData] = React.useState(props.components);
+  const [data, setData] = React.useState(props.data);
+  const [components, setComponents] = React.useState(props.components);
   const { Component } = props;
 
   const onFilterChanged = () => {
-    const filteredItems = filterItems(data, props.filter, props.filterKey);
+    const filteredItems = filterItems(components, props.filter, props.filterKey);
     setData(filteredItems);
   };
 
   React.useEffect(() => {
+    setComponents(props.components);
     setData(props.components);
   }, [props.components]);
 
@@ -32,6 +34,7 @@ function FilterMasterPanelContent(props) {
 
 
 FilterMasterPanelContent.propTypes = {
+  data: PropTypes.arrayOf().isRequired,
   components: PropTypes.arrayOf().isRequired,
   filter: PropTypes.element.isRequired,
   filterKey: PropTypes.string.isRequired,
