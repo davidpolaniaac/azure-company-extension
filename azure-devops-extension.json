@@ -1,10 +1,8 @@
 {
     "manifestVersion": 1,
     "id": "azure-company",
-    "publisher": "dpolania",
-    "version": "1.0.530",
+    "version": "1.0.536",
     "name": "Azure Company",
-    "baseUri": "https://localhost:3000",
     "description": "Create the structure of your applications",
     "categories": [
         "Azure Pipelines"
@@ -15,8 +13,7 @@
         }
     ],
     "scopes": [
-        "vso.work",
-        "vso.code"
+        "vso.extension.data_write"
     ],
     "icons": {
         "default": "logo.png"
