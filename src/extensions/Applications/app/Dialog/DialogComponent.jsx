@@ -38,13 +38,12 @@ class DialogComponent extends React.Component {
   render() {
     const { onDismiss, action } = this.props;
     const onSubmit = this.getSubmit(action);
-
     return (
       <GenericForm
         onSubmit={onSubmit}
         onDismiss={onDismiss}
         titleButton={action}
-        textField={ELEMENTS.Component}
+        textField={ELEMENTS.COMPONENT}
         update={action === ACTIONS.UPDATE}
       />
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TwoLineTableCell } from 'azure-devops-ui/Table';
 
-export const renderAppNameCell = (
+export const renderCell = (
   rowIndex,
   columnIndex,
   tableColumn,

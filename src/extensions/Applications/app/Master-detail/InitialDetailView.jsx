@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MasterDetailsContext } from 'azure-devops-ui/MasterDetailsContext';
-import { SimpleTableCell, Table, TwoLineTableCell } from 'azure-devops-ui/Table';
+import { Table } from 'azure-devops-ui/Table';
 import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import { ArrayItemProvider } from 'azure-devops-ui/Utilities/Provider';
 import { Page } from 'azure-devops-ui/Page';
 import { Card } from 'azure-devops-ui/Card';
+import { renderCell } from './renderCell';
+import { renderDateColumn } from './renderDateColumn';
 import newPayload from './newPayload';
 import commandBarItems from './commandBarItems';
 import CustomHeader from '../components/CustomHeader';
@@ -17,51 +19,19 @@ import { actionCreators as componentsActions } from '../../redux/components/acti
 
 function InitialDetailView(props) {
   const masterDetailsContext = React.useContext(MasterDetailsContext);
+  const [components, setComponents] = React.useState(props.components);
+  const [app, setApp] = React.useState({});
+  const previousRef = React.useRef(props.components);
   const {
     detailItem, applications, setApplication, getComponents,
   } = props;
-
-  const renderCommitNameCell = (
-    rowIndex,
-    columnIndex,
-    tableColumn,
-    tableItem,
-  ) => (
-    <TwoLineTableCell
-      columnIndex={columnIndex}
-      className="fontWeightSemiBold fontSizeM scroll-hidden"
-      key={`col-${columnIndex}`}
-      tableColumn={tableColumn}
-      line1={<span className="fontSizeM text-ellipsis">{tableItem.name}</span>}
-      line2={
-        <span className="fontSize secondary-text flex-center text-ellipsis">
-          {tableItem.userName}
-        </span>
-                }
-    />
-  );
-
-  const renderDateColumn = (
-    rowIndex,
-    columnIndex,
-    tableColumn,
-    tableItem,
-  ) => (
-    <SimpleTableCell
-      key={`col-${columnIndex}`}
-      columnIndex={columnIndex}
-      tableColumn={tableColumn}
-    >
-      <div>{tableItem.date}</div>
-    </SimpleTableCell>
-  );
 
   const columns = [
     {
       id: 'applications',
       name: 'Applications',
       width: new ObservableValue(-33),
-      renderCell: renderCommitNameCell,
+      renderCell,
     },
     {
       id: 'date',
@@ -71,11 +41,18 @@ function InitialDetailView(props) {
     },
   ];
 
+  React.useEffect(() => {
+    if (previousRef.current !== props.components) {
+      const newView = newPayload(app, props.components);
+      masterDetailsContext.push(newView);
+    }
+    setComponents(props.components);
+  }, [props.components]);
+
   const onRowActivated = async (event, tableRow) => {
     setApplication(tableRow.data.id);
+    setApp(tableRow.data);
     await getComponents(tableRow.data.id);
-    const newView = newPayload(tableRow.data);
-    masterDetailsContext.push(newView);
   };
 
   return (
@@ -108,12 +85,14 @@ function InitialDetailView(props) {
 InitialDetailView.propTypes = {
   detailItem: PropTypes.element.isRequired,
   applications: PropTypes.arrayOf(PropTypes.shape()),
+  components: PropTypes.arrayOf(PropTypes.shape()),
   setApplication: PropTypes.func.isRequired,
   getComponents: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   applications: state.applications.applications,
+  components: state.components.components,
 });
 
 const mapDispatchToProps = dispatch => ({

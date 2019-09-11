@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { bindSelectionToObservable } from 'azure-devops-ui/MasterDetailsContext';
 import { ArrayItemProvider } from 'azure-devops-ui/Utilities/Provider';
 import { List, ListSelection } from 'azure-devops-ui/List';
-import renderInitialRow from './renderInitialRow';
+import renderRow from './renderRow';
 
-function newMasterPanelContent(props) {
-  const initialItemProvider = new ArrayItemProvider(props.components);
+
+function MasterPanelContent(props) {
+  const initialItemProvider = new ArrayItemProvider(props.data);
   const initialSelection = new ListSelection();
 
   React.useEffect(() => {
@@ -22,21 +22,15 @@ function newMasterPanelContent(props) {
     <List
       itemProvider={initialItemProvider}
       selection={initialSelection}
-      renderRow={renderInitialRow}
+      renderRow={renderRow}
       width="100%"
     />
   );
 }
 
-
-newMasterPanelContent.propTypes = {
-  components: PropTypes.arrayOf(PropTypes.shape()),
+MasterPanelContent.propTypes = {
+  data: PropTypes.arrayOf().isRequired,
   initialSelectedMasterItem: PropTypes.element.isRequired,
 };
 
-const mapStateToProps = state => ({
-  components: state.components.components,
-});
-
-export default connect(mapStateToProps, null)(newMasterPanelContent);
-
+export default MasterPanelContent;

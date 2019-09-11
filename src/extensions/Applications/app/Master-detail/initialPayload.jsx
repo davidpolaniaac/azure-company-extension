@@ -6,6 +6,7 @@ import FilterMasterPanelContent from './filterMasterPanelContent';
 import CustomHeader from '../components/CustomHeader';
 import InitialDetailView from './InitialDetailView';
 import commandBarItems from './commandBarItems';
+import MasterPanelContent from './masterPanelContent';
 import { ELEMENTS } from '../../constants/elements';
 
 function initialPayload(data, value, setManagement, getApplications) {
@@ -14,7 +15,7 @@ function initialPayload(data, value, setManagement, getApplications) {
     key: 'initial',
     masterPanelContent: {
       renderContent: (parentItem, initialSelectedMasterItem) => (
-        <FilterMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} data={data} filter={filter} />
+        <FilterMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} data={data} filter={filter} filterKey="keyword" Component={MasterPanelContent} />
       ),
       renderHeader: () => (
         <CustomHeader CommandBarItems={commandBarItems} element={ELEMENTS.MANAGEMENT} title="Managements" />
