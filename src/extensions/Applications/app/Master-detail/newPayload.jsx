@@ -1,16 +1,19 @@
 import React from 'react';
-import { TextField } from 'azure-devops-ui/TextField';
+import { Filter } from 'azure-devops-ui/Utilities/Filter';
 import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import { MasterPanelHeader } from 'azure-devops-ui/MasterDetails';
-import NewMasterPanelContent from './newMasterPanelContent';
+import { InlineKeywordFilterBarItem } from 'azure-devops-ui/TextFilterBarItem';
+import NewFilterMasterPanelContent from './newfilterDetailMasterPanelContent';
+import MasterPanelContent from './masterPanelContent';
 import NewDetailsContent from './newDetailsContent';
 
-function newPayload(parent) {
+function newPayload(parent, data) {
+  const filter = new Filter();
   return ({
     key: 'components-details',
     masterPanelContent: {
       renderContent: (parentItem, initialSelectedMasterItem) => (
-        <NewMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} />
+        <NewFilterMasterPanelContent initialSelectedMasterItem={initialSelectedMasterItem} filter={filter} filterKey="keyword-detail" Component={MasterPanelContent} />
       ),
       renderHeader: parentItem => (
 
@@ -20,13 +23,13 @@ function newPayload(parent) {
         />
       ),
       renderSearch: () => (
-        <TextField prefixIconProps={{ iconName: 'Search' }} placeholder="Search component" />
+        <InlineKeywordFilterBarItem filter={filter} filterItemKey="keyword-detail" />
       ),
     },
     detailsContent: {
       renderContent: item => <NewDetailsContent item={item} />,
     },
-    selectedMasterItem: new ObservableValue({}),
+    selectedMasterItem: new ObservableValue(data[0] || {}),
     parentItem: parent,
   });
 }

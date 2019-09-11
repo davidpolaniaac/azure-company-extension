@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListItem } from 'azure-devops-ui/List';
 
-function renderInitialRow(index, item, details, key) {
+function renderRow(index, item, details, key) {
   return (
     <ListItem
       className="master-example-row"
@@ -20,4 +20,4 @@ function renderInitialRow(index, item, details, key) {
   );
 }
 
-export default renderInitialRow;
+export default renderRow;

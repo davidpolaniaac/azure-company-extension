@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "azure-company",
     "publisher": "dpolania",
-    "version": "1.0.528",
+    "version": "1.0.530",
     "name": "Azure Company",
     "baseUri": "https://localhost:3000",
     "description": "Create the structure of your applications",
