@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "azure-company",
-    "version": "1.0.536",
+    "version": "1.0.539",
     "name": "Azure Company",
     "description": "Create the structure of your applications",
     "categories": [

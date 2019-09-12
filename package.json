@@ -35,6 +35,7 @@
     "azure-devops-extension-api": "^1.150.2",
     "azure-devops-extension-sdk": "^2.0.7",
     "azure-devops-ui": "~1.150.0",
+    "md5": "^2.2.1",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
