@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { TextField, TextFieldWidth } from 'azure-devops-ui/TextField';
-import { Button } from 'azure-devops-ui/Button';
 import PropTypes from 'prop-types';
-import { ButtonGroup } from 'azure-devops-ui/ButtonGroup';
 import { FormItem } from 'azure-devops-ui/FormItem';
-import { capitalize } from '../utils';
 import FORM_NAMES from '../../constants/formNames';
 import { GENERIC_FIELDS } from '../../constants/fields';
 import CustomFormFooter from '../components/CustomFormFooter';
@@ -41,6 +38,8 @@ const validate = (values) => {
       errors[key] = 'must be at least 5 characters';
     } else if (values[key].length > 80) {
       errors[key] = 'must be less than 80 characters';
+    } else if (values[key].length > values[key].trim().length) {
+      errors[key] = 'should not start and end with spaces';
     }
   });
 
@@ -58,16 +57,16 @@ const GenericForm = props => (
       type="text"
     />
 
-    { props.update &&
-    <>
-      <br />
-      <Field
-        name={GENERIC_FIELDS.NEW_NAME}
-        label={`new name of the ${props.textField}`}
-        component={Name}
-        type="text"
-      />
-    </>
+    {props.update &&
+      <>
+        <br />
+        <Field
+          name={GENERIC_FIELDS.NEW_NAME}
+          label={`new name of the ${props.textField}`}
+          component={Name}
+          type="text"
+        />
+      </>
     }
     <br />
     <div>

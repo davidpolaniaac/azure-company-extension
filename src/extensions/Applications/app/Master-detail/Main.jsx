@@ -8,7 +8,9 @@ import { actionCreators as managementsActions } from '../../redux/managements/ac
 import { actionCreators as applicationsActions } from '../../redux/applications/actions';
 
 function Main(props) {
-  const { data, setManagement, getApplications } = props;
+  const {
+    data, setManagement, getApplications,
+  } = props;
   const masterDetailsContext = new BaseMasterDetailsContext(
     initialPayload(data, data[0], setManagement, getApplications),
     () => {

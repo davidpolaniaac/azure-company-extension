@@ -1,4 +1,5 @@
 import * as SDK from 'azure-devops-extension-sdk';
+import md5 from 'md5';
 import { getDateFull } from '../app/utils';
 import { GENERIC_FIELDS } from '../constants/fields';
 
@@ -22,8 +23,9 @@ export async function getDocumentByName(collectionName, value) {
 export async function normalizeData(value) {
   const userName = SDK.getUser().displayName;
   const date = getDateFull();
+  const id = md5(value[GENERIC_FIELDS.NAME].trim().toLowerCase());
   const data = {
-    userName, date, ...value,
+    id, userName, date, ...value,
   };
   return data;
 }

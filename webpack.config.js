@@ -18,12 +18,18 @@ module.exports = {
   entry: entries,
   output: {
     filename: '[name]/index.js',
+    publicPath: '/dist/',
   },
   resolve: {
     extensions: ['.jsx', '.js'],
     alias: {
       'azure-devops-extension-sdk': path.resolve('node_modules/azure-devops-extension-sdk'),
     },
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    https: true,
+    port: 3000,
   },
   stats: {
     warnings: false,
