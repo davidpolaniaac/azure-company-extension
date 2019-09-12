@@ -1,0 +1,6 @@
+{
+    "id": "azure-company-dev",
+    "public": false,
+    "publisher": "dpolania",
+    "baseUri": "https://localhost:3000"
+}

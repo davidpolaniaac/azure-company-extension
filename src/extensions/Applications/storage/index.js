@@ -4,7 +4,7 @@ import { GENERIC_FIELDS } from '../constants/fields';
 export async function createDocumentStorage(collectionName, value) {
   const dataManager = await getDataManager();
   let data = await getDocumentByName(collectionName, value[GENERIC_FIELDS.NAME]);
-  data = typeof (data) === 'undefined' ? await normalizeData(value) : undefined;
+  data = typeof (data) === 'undefined' ? await normalizeData(value) : data;
   return dataManager.createDocument(collectionName, data);
 }
 

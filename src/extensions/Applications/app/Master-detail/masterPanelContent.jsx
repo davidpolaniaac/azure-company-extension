@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { bindSelectionToObservable } from 'azure-devops-ui/MasterDetailsContext';
 import { ArrayItemProvider } from 'azure-devops-ui/Utilities/Provider';
 import { List, ListSelection } from 'azure-devops-ui/List';
-import renderInitialRow from './renderInitialRow';
+import renderRow from './renderRow';
 
-function InitialMasterPanelContent(props) {
+
+function MasterPanelContent(props) {
   const initialItemProvider = new ArrayItemProvider(props.data);
   const initialSelection = new ListSelection();
 
@@ -21,17 +22,15 @@ function InitialMasterPanelContent(props) {
     <List
       itemProvider={initialItemProvider}
       selection={initialSelection}
-      renderRow={renderInitialRow}
+      renderRow={renderRow}
       width="100%"
     />
   );
 }
 
-
-InitialMasterPanelContent.propTypes = {
+MasterPanelContent.propTypes = {
   data: PropTypes.arrayOf().isRequired,
   initialSelectedMasterItem: PropTypes.element.isRequired,
 };
 
-
-export default InitialMasterPanelContent;
+export default MasterPanelContent;
