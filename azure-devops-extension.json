@@ -1,17 +1,15 @@
 {
     "manifestVersion": 1,
     "id": "azure-company",
-    "version": "1.0.539",
+    "version": "1.0.544",
     "name": "Azure Company",
     "description": "Create the structure of your applications",
     "categories": [
         "Azure Pipelines"
     ],
-    "targets": [
-        {
-            "id": "Microsoft.VisualStudio.Services"
-        }
-    ],
+    "targets": [{
+        "id": "Microsoft.VisualStudio.Services"
+    }],
     "scopes": [
         "vso.extension.data_write"
     ],
@@ -23,8 +21,7 @@
             "path": "overview.md"
         }
     },
-    "files": [
-        {
+    "files": [{
             "path": "static",
             "addressable": true
         },
@@ -33,7 +30,19 @@
             "addressable": true
         }
     ],
-    "contributions": [
+    "contributions": [{
+            "id": "feature-company",
+            "type": "ms.vss-web.feature",
+            "description": "Show the new Company hub in the hub group",
+            "targets": ["ms.vss-web.managed-features", "ms.vss-web.managed-features-onprem"],
+            "properties": {
+                "name": "Enable Company",
+                "userConfigurable": false,
+                "hostConfigurable": true,
+                "defaultState": false,
+                "hostScopes": ["project", null]
+            }
+        },
         {
             "id": "company-menu-group",
             "type": "ms.vss-web.hub-group",
@@ -44,7 +53,13 @@
             "properties": {
                 "name": "Company",
                 "icon": "asset://static/logo.png"
-            }
+            },
+            "constraints": [{
+                "name": "Feature",
+                "properties": {
+                    "featureId": "xxxxxxxxxxxxxx.company.feature-company"
+                }
+            }]
         }
     ]
 }
