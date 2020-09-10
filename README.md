@@ -1,5 +1,23 @@
 # Azure DevOps Company Extension
 
+## About extension
+
+This is an extension to manage the hierarchical structure of the organization and associate the components and applications to the managements in charge of managing
+
+## result 
+
+### Activate the extension
+![](static/feature.png)
+
+### a new icon appears in the main menu
+
+![](static/logo.png)
+
+## Start configuring the extension by entering the information
+
+![](static/result.png)
+
+
 ## Dependencies
 
 The repository depends on a few Azure DevOps packages:
