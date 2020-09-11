@@ -8,18 +8,18 @@ import { ELEMENTS } from '../../constants/elements';
 
 class DialogManagement extends React.Component {
   onCreate = (values) => {
-    const { createManagement } = this.props;
-    return createManagement(values);
+    const { createManagement, project } = this.props;
+    return createManagement(project, values);
   }
 
   onDelete = (values) => {
-    const { deleteManagement } = this.props;
-    return deleteManagement(values);
+    const { deleteManagement, project } = this.props;
+    return deleteManagement(project, values);
   }
 
   onUpdate = (values) => {
-    const { updateManagement } = this.props;
-    return updateManagement(values);
+    const { updateManagement, project } = this.props;
+    return updateManagement(project, values);
   }
 
   getSubmit(action) {
@@ -57,12 +57,18 @@ DialogManagement.propTypes = {
   deleteManagement: PropTypes.func.isRequired,
   updateManagement: PropTypes.func.isRequired,
   onDismiss: PropTypes.func.isRequired,
+  project: PropTypes.string.isRequired,
+
 };
 
-const mapDispatchToProps = dispatch => ({
-  createManagement: values => dispatch(managementActions.createManagement(values)),
-  deleteManagement: values => dispatch(managementActions.deleteManagement(values)),
-  updateManagement: values => dispatch(managementActions.updateManagement(values)),
+const mapStateToProps = state => ({
+  project: state.project.project,
 });
 
-export default connect(null, mapDispatchToProps)(DialogManagement);
+const mapDispatchToProps = dispatch => ({
+  createManagement: (project, values) => dispatch(managementActions.createManagement(project, values)),
+  deleteManagement: (project, values) => dispatch(managementActions.deleteManagement(project, values)),
+  updateManagement: (project, values) => dispatch(managementActions.updateManagement(project, values)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DialogManagement);

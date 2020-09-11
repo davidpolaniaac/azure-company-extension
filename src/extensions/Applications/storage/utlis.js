@@ -9,6 +9,12 @@ export async function getDataManager() {
   return service.getExtensionDataManager(SDK.getExtensionContext().id, accessToken);
 }
 
+export async function getProjectId() {
+  const service = await SDK.getService('ms.vss-tfs-web.tfs-page-data-service');
+  const project = await service.getProject();
+  return project.id
+}
+
 export async function getDocumentByName(collectionName, value) {
   try {
     const dataManager = await getDataManager();
@@ -22,8 +28,10 @@ export async function getDocumentByName(collectionName, value) {
 
 export async function normalizeData(value) {
   const userName = SDK.getUser().displayName;
+  const projectId = await getProjectId();
+  const name = value[GENERIC_FIELDS.NAME].trim().toLowerCase();
   const date = getDateFull();
-  const id = md5(value[GENERIC_FIELDS.NAME].trim().toLowerCase());
+  const id = md5(projectId+name);
   const data = {
     id, userName, date, ...value,
   };

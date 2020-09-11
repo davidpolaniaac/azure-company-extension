@@ -6,6 +6,7 @@ import managements from './managements/reducer';
 import applications from './applications/reducer';
 import components from './components/reducer';
 import dialog from './dialog/reducer';
+import project from './project/reducer';
 
 const reducers = {
   form: reduxFormReducer,
@@ -13,6 +14,7 @@ const reducers = {
   dialog,
   applications,
   components,
+  project,
 };
 
 const appReducer = combineReducers(reducers);
