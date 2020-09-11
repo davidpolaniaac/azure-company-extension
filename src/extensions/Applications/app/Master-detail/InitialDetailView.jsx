@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { MasterDetailsContext } from 'azure-devops-ui/MasterDetailsContext';
 import { Table } from 'azure-devops-ui/Table';
+import { FilterBar } from "azure-devops-ui/FilterBar";
+import { KeywordFilterBarItem } from "azure-devops-ui/TextFilterBarItem";
+import { Filter, FILTER_CHANGE_EVENT } from "azure-devops-ui/Utilities/Filter";
 import { ObservableValue } from 'azure-devops-ui/Core/Observable';
 import { ArrayItemProvider } from 'azure-devops-ui/Utilities/Provider';
 import { Page } from 'azure-devops-ui/Page';
@@ -15,6 +18,7 @@ import CustomHeader from '../components/CustomHeader';
 import { ELEMENTS } from '../../constants/elements';
 import { actionCreators as applicationsActions } from '../../redux/applications/actions';
 import { actionCreators as componentsActions } from '../../redux/components/actions';
+import { filterItems } from '../utils';
 
 
 function InitialDetailView(props) {
@@ -22,9 +26,17 @@ function InitialDetailView(props) {
   const [components, setComponents] = React.useState(props.components);
   const [app, setApp] = React.useState({});
   const previousRef = React.useRef(props.components);
+  const filter = new Filter();
   const {
-    detailItem, applications, setApplication, getComponents,
+    detailItem, setApplication, getComponents,
   } = props;
+
+  const [applications, setApplications] = React.useState(props.applications);
+
+  React.useEffect(() => {
+    setApplications(props.applications);
+  }, [props.applications]);
+
 
   const columns = [
     {
@@ -55,6 +67,12 @@ function InitialDetailView(props) {
     await getComponents(tableRow.data.id);
   };
 
+
+  filter.subscribe(() => {
+    const filteredItems = filterItems(props.applications, filter, "Placeholder");
+    setApplications(filteredItems);
+  }, FILTER_CHANGE_EVENT);
+
   return (
     <Page>
       <CustomHeader
@@ -64,7 +82,12 @@ function InitialDetailView(props) {
         element={ELEMENTS.APPLICATION}
       />
 
+      <FilterBar filter={filter} hideClearAction={true}>
+        <KeywordFilterBarItem filterItemKey="Placeholder" />
+      </FilterBar>
+
       <div className="page-content page-content-top">
+
         <Card
           className="bolt-card-no-vertical-padding"
           contentProps={{ contentPadding: false }}
